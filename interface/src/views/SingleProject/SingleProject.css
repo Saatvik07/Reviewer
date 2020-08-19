@@ -1,0 +1,234 @@
+.singleProject-container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}
+.singleProject-left-div {
+	height: 100vh;
+	width: 20%;
+	color: #ff5714;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+.singleProject-right-div {
+	width: 80%;
+	min-height: 100vh;
+	background-color: #151515;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+.singleProject-logo {
+	width: 70%;
+	height: auto;
+	margin: 20px 19px;
+}
+.singleProject-info-div {
+	display: flex;
+	height: 50%;
+	width: 90%;
+	margin: 0 auto;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: flex-start;
+}
+.singleProject-info-div h3 {
+	font-size: 20px;
+}
+.singleProject-info-div h5 {
+	text-align: left;
+}
+.addOptimize-input,
+.addExtenIdea-input {
+	color: #ff5714;
+	width: 80%;
+	background-color: #232324;
+	border: none;
+	border-radius: 10px;
+	font-size: 12px;
+	padding: 10px;
+	margin: 10px;
+}
+textarea.addOptimize-input,
+textarea.addExtenIdea-input {
+	min-height: 30vh;
+	font-size: 15px;
+	margin: 20px auto;
+	width: 95%;
+}
+.addOptimize-div,
+.addExten-div {
+	margin: 50px 0;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.addOptimize-input-div,
+.addExten-input-div {
+	width: 30%;
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.showOptimize-div,
+.showExtenIdea-div {
+	background-color: #232324;
+	width: 65%;
+	max-height: 45vh;
+	min-height: 45vh;
+	overflow-y: scroll;
+}
+.singleOptimize-div,
+.singleExtenIdea-div {
+	opacity: 1;
+	width: 90%;
+	margin: 20px auto;
+	display: flex;
+	flex-direction: column;
+	background-color: #ffba08;
+}
+
+.singleOptimize-div button,
+.singleOptimize-div h5,
+.singleExtenIdea-div h5,
+.singleExtenIdea-div button {
+	font-size: 20px;
+	margin: 10px 20px;
+	display: inline;
+}
+.singleOptimize-div p,
+.singleExtenIdea-div p {
+	margin: 10px 20px;
+}
+.closeOptimize-btn,
+.closeExtenIdea-btn {
+	background-color: #151515;
+	color: red;
+	border: none;
+	transition: all 0.5s linear;
+}
+.openOptimize-btn,
+.openExtenIdea-btn {
+	background-color: #151515;
+	color: #6eeb83;
+	border: none;
+	opacity: 1;
+	transition: all 0.5s linear;
+}
+.notavailable {
+	opacity: 0.6;
+	transition: all 0.5s linear;
+}
+.available {
+	color: #232324;
+	opacity: 1;
+	transition: all 0.5s linear;
+}
+.addOptimize-btn,
+.addExtenIdea-btn {
+	background-color: #232324;
+	border: none;
+	padding: 10px;
+	color: #6eeb83;
+	border-radius: 10px;
+}
+.deleteOptimize-btn,
+.deleteExtenIdea-btn {
+	border: none;
+	background-color: red;
+	color: #232324;
+}
+body > div.fade.modal-container.modal.show > div > div {
+	color: #ff5714;
+	background-color: #232324;
+}
+body
+	> div.fade.modal-container.modal.show
+	> div
+	> div
+	> div.modal-footer
+	> button {
+	background-color: #151515;
+	color: red;
+	border: none;
+}
+body > div.fade.modal-container.modal.show > div > div > div.modal-footer {
+	border: none;
+}
+body > div.fade.modal-container.modal.show > div > div > div.modal-header {
+	border: none;
+}
+@media only screen and (max-width: 720px) {
+	.singleProject-left-div {
+		height: 20vh;
+		width: 100%;
+		flex-direction: row;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+	.singleProject-left-div img {
+		width: 20%;
+		height: auto;
+		margin: 10px;
+	}
+	.singleProject-info-div {
+		flex-direction: row;
+		flex-wrap: wrap;
+		width: 80%;
+	}
+	.singleProject-left-div h3,
+	.singleProject-left-div h5 {
+		font-size: 10px;
+		width: 30%;
+		text-align: center;
+		margin: 10px;
+	}
+	.singleProject-container {
+		flex-direction: column;
+	}
+	.singleProject-right-div {
+		width: 100%;
+	}
+	.addOptimize-div {
+		flex-direction: column;
+	}
+	.addExten-div {
+		flex-direction: column-reverse;
+	}
+	.showOptimize-div,
+	.showExtenIdea-div {
+		width: 90%;
+		min-height: 20vh;
+	}
+	.addOptimize-input-div,
+	.addExten-input-div {
+		width: 70%;
+	}
+	.closeOptimize-btn,
+	.closeExtenIdea-btn {
+		font-size: 10px;
+	}
+	.singleOptimize-div button,
+	.singleExtenIdea-div button {
+		font-size: 12px;
+		margin: 10px;
+	}
+	.singleOptimize-div h5,
+	.singleExtenIdea-div h5 {
+		font-size: 16px;
+	}
+	.singleOptimize-div p,
+	.singleExtenIdea-div p {
+		font-size: 12px;
+	}
+	.addOptimize-input-div h2,
+	.addExten-input-div h2 {
+		font-size: 30px;
+	}
+}

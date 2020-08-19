@@ -1,0 +1,109 @@
+.projects-container {
+	max-width: 90vw;
+	max-height: 80vh;
+	margin: 30px auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	overflow-y: scroll;
+	background-color: #151515;
+}
+.project-div {
+	display: flex;
+	flex-direction: column;
+	width: 35%;
+	margin: 50px;
+	background-color: #ffba08;
+	color: #151515;
+}
+.essential-div {
+	display: inline-flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 20px;
+}
+.info-div {
+	margin: 0 30px;
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+.info-div h3,
+.changeable-div h3,
+.changeable-div h4 {
+	margin: 10px;
+}
+.changeable-div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	margin: 0px 20px 20px 20px;
+}
+.changeable-div h3 {
+	margin: 10px;
+}
+.available {
+	color: red;
+}
+.not-available {
+	color: green;
+}
+.project-btn-div {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 30px 0;
+}
+.visitProject-btn,
+.updateProject-btn,
+.deleteProject-btn {
+	background-color: #232324;
+	color: lightblue;
+	border: none;
+	padding: 10px 30px;
+	font-size: 18px;
+	margin: 0px 20px;
+}
+.updateProject-btn {
+	color: #6eeb83;
+}
+.deleteProject-btn {
+	color: #ff5714;
+}
+.project-heading {
+	font-weight: bold;
+}
+@media only screen and (max-width: 1020px) and (min-width: 721px) {
+	.project-div {
+		width: 70%;
+	}
+}
+@media only screen and (max-width: 720px) {
+	.project-div {
+		width: 80%;
+	}
+	.info-div h4,
+	.changeable-div h4 {
+		font-size: 16px;
+	}
+	.changeable-div {
+		margin: 0 20px 10px 20px;
+	}
+	.project-btn-div {
+		margin: 15px 0;
+	}
+	.visitProject-btn,
+	.deleteProject-btn,
+	.updateProject-btn {
+		font-size: 14px;
+		padding: 10px 15px;
+		margin: 0 10px;
+	}
+	.essential-div img {
+		width: 75px;
+		height: auto;
+	}
+}

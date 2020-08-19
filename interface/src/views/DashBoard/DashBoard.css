@@ -1,0 +1,250 @@
+.idea-div {
+	background-color: #ffba08;
+	color: #151515;
+	width: 25%;
+	min-height: 40vh;
+	margin: 30px;
+	padding: 10px;
+}
+.ideasDisplay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 90%;
+	margin: 30px auto;
+	max-height: 60vh;
+	overflow-y: scroll;
+	background-color: #151515;
+}
+.dashboard-container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+::-webkit-scrollbar {
+	background-color: transparent;
+	width: 0;
+}
+.addProject-input {
+	color: #ff5714;
+	width: 80%;
+	background-color: #151515;
+	border: none;
+	border-radius: 10px;
+	font-size: 15px;
+	padding: 10px;
+	margin: 30px auto;
+}
+
+input.addIdea-input,
+textarea.addIdea-input {
+	width: 80%;
+	background-color: #151515;
+	color: #ff5714;
+	border: none;
+	border-radius: 10px;
+	font-size: 15px;
+	padding: 10px;
+	margin: 30px auto;
+}
+textarea.addIdea-input {
+	height: 45vh;
+}
+.screenshot {
+	width: auto;
+	height: 150px;
+	animation-name: previewImage;
+	animation-duration: 1s;
+}
+.logo {
+	width: 150px;
+	height: auto;
+	animation-name: previewImage;
+	animation-duration: 1s;
+}
+.text-inputs {
+	margin-bottom: 20px;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+.addIdea-btn {
+	background-color: #151515;
+	color: #6eeb83;
+	border: none;
+	padding: 10px;
+	min-width: 30%;
+	font-size: 15px;
+}
+.idea-body {
+	min-height: 200px;
+	color: #232324;
+}
+.addProject-headings {
+	color: #6eeb83;
+	margin: 0 auto;
+}
+.addProject-input-headings {
+	display: inline-flex;
+	flex-direction: column;
+	width: 50%;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+	filter: invert(1);
+}
+h3.addIdea-heading {
+	text-align: center;
+	display: block;
+	color: #ffba08;
+	margin: 30px 0 60px 0;
+}
+.showIdea-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	margin: 0 auto;
+}
+.addProject-container {
+	display: flex;
+	width: 70%;
+	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
+}
+.addIdea-container {
+	display: flex;
+	width: 30%;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+::-webkit-file-upload-button {
+	background-color: #151515;
+	color: #6eeb83;
+	border: none;
+	padding: 5px;
+	margin-right: 30px;
+}
+input#file-upload-button {
+	background-color: #232324;
+	color: #ff5714;
+}
+.btn-div {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+	align-items: center;
+}
+.update-btn,
+.delete-btn {
+	background-color: #232324;
+	color: #6eeb83;
+	border: none;
+	padding: 5px;
+	margin: 0px 20px;
+}
+.delete-btn {
+	color: #ff5714;
+}
+.idea-title {
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+#screenshot-div,
+#logo-div {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #151515;
+	padding: 20px;
+	width: 40%;
+	margin: 30px;
+}
+input[type="file"] {
+	background-color: #232324;
+}
+.uploader-div {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@media only screen and (max-width: 1020px) {
+	.addProject-container {
+		width: 90%;
+		margin: 20px 0;
+	}
+	.addIdea-container {
+		margin: 20px 0;
+		width: 90%;
+		font-size: 16px;
+	}
+	.addProject-headings {
+		font-size: 15px;
+	}
+	::placeholder {
+		font-size: 10px;
+	}
+	.idea-div {
+		font-size: 14px;
+		min-height: 30vh;
+		min-width: 80vw;
+	}
+	h3.addIdea-heading {
+		font-size: 24px;
+	}
+	.update-btn,
+	.delete-btn {
+		font-size: 12px;
+		margin: 0px 10px;
+	}
+	.idea-body {
+		min-height: 100px;
+	}
+	.screenshot {
+		width: 150px;
+		height: auto;
+	}
+	.logo {
+		width: 150px;
+		height: auto;
+	}
+	textarea.addIdea-input {
+		max-height: 20vh;
+	}
+	input[type="date"] {
+		font-size: 10px;
+	}
+	::-webkit-file-upload-button {
+		padding: 2px;
+		font-size: 5px;
+		margin-right: 5px;
+	}
+	#screenshot-div,
+	#logo-div {
+		min-width: 100%;
+	}
+	.uploader-div {
+		flex-wrap: wrap;
+	}
+	#logo-div {
+		margin: 30px 0;
+	}
+}
+@keyframes previewImage {
+	0% {
+		transform: translateY(-100px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0px);
+		opacity: 1;
+	}
+}

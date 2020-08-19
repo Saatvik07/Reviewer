@@ -1,0 +1,24 @@
+.navbar-container {
+	width: 100%;
+	min-width: 100px;
+	display: flex;
+	justify-content: space-between;
+	background-color: #151515;
+}
+.nav-options {
+	display: inline-flex;
+	justify-content: flex-start;
+}
+.nav-btn {
+	background-color: #151515;
+
+	margin: 15px;
+	border: none;
+	font-size: 20px;
+	color: #ff5714;
+}
+@media only screen and (max-width: 720px) {
+	.nav-btn {
+		font-size: 12px;
+	}
+}

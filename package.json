@@ -1,0 +1,31 @@
+{
+	"name": "reviewer",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"interface": "cd interface && npm start",
+		"start": "nodemon server.js",
+		"dev": "concurrently -n 'server,interface' \"npm run start\" \"npm run interface\""
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.0.0",
+		"body-parser": "^1.19.0",
+		"concurrently": "^5.2.0",
+		"cookie-parser": "^1.4.5",
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"errorhandler": "^1.5.1",
+		"express": "^4.17.1",
+		"googleapis": "^58.0.0",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.9.25",
+		"morgan": "^1.10.0",
+		"nodemailer": "^6.4.11",
+		"nodemon": "^2.0.4"
+	}
+}
