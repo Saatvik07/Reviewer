@@ -8,6 +8,7 @@ import Projects from "../Projects/Projects";
 import SingleProject from "../SingleProject/SingleProject";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "../Login/Login";
+import Verify from "../Verify/Verify";
 export const userContext = React.createContext(null);
 function App() {
 	useEffect(() => {
@@ -20,7 +21,6 @@ function App() {
 			body: JSON.stringify({ sessionID: sessionStorage.getItem("sessionID") }),
 		}).then(async (response) => {
 			if (response.ok) {
-				console.log("Page Refreshed, refresh_token generated");
 				const new_access_token = await response.json();
 				setAccess(new_access_token);
 			} else {
@@ -43,6 +43,7 @@ function App() {
 							<Route path='/projects' component={Projects} />
 							<Route path='/single_project/:id' component={SingleProject} />
 							<Route path='/login' component={Login} />
+							<Route path='/verify/:accessToken' component={Verify} />
 						</div>
 					</userContext.Provider>
 				</div>

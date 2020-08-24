@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./SingleProject.css";
 import { withRouter, useParams } from "react-router-dom";
 import { getProject, addOptiAndIdea } from "../../utils/helpers";
 import { Modal, Button } from "react-bootstrap";
 import logo from "../Projects/logo.png";
+import { userContext } from "../App/App";
 
 function SingleProject() {
+	const { access, setAccess } = useContext(userContext);
 	const { id } = useParams();
 	const [project, setProject] = useState({
 		_id: 1,
@@ -29,7 +31,7 @@ function SingleProject() {
 	const [ideaDisp, setIdeaDisp] = useState([]);
 	const [showModal, setShowModal] = useState([false, false]);
 	useEffect(() => {
-		getProject(id).then((response) => {
+		getProject(id, access).then((response) => {
 			if (response) {
 				setProject(response);
 			}
@@ -46,9 +48,7 @@ function SingleProject() {
 		const divId = `${prefix}d${id}`;
 		const buttonId = `${prefix}btn${id}`;
 		const buttonDivId = `${prefix}d2${id}`;
-		document
-			.getElementById(buttonDivId)
-			.removeChild(document.getElementById(buttonId));
+		document.getElementById(buttonDivId).removeChild(document.getElementById(buttonId));
 		const newButton = document.createElement("button");
 		newButton.id = `${prefix}btn${id}`;
 		newButton.innerText = "Close";
@@ -66,8 +66,7 @@ function SingleProject() {
 					...idea,
 				};
 			});
-			document.getElementById(divId).className =
-				"singleExtenIdea-div available";
+			document.getElementById(divId).className = "singleExtenIdea-div available";
 			newButton.className = "closeExtenIdea-btn";
 			setProject((current) => {
 				return {
@@ -117,16 +116,13 @@ function SingleProject() {
 		const divId = `${prefix}d${id}`;
 		const buttonId = `${prefix}btn${id}`;
 		const buttonDivId = `${prefix}d2${id}`;
-		document
-			.getElementById(buttonDivId)
-			.removeChild(document.getElementById(buttonId));
+		document.getElementById(buttonDivId).removeChild(document.getElementById(buttonId));
 		const newButton = document.createElement("button");
 		newButton.id = `${prefix}btn${id}`;
 		newButton.innerText = "Open";
 		if (prefix === "E") {
 			console.log("Idea " + id + " is being closed");
-			document.getElementById(divId).className =
-				"singleExtenIdea-div notavailable";
+			document.getElementById(divId).className = "singleExtenIdea-div notavailable";
 			newButton.className = "openExtenIdea-btn";
 			let updated = project.extendedIdeas.map((idea) => {
 				if (idea.title === id) {
@@ -150,8 +146,7 @@ function SingleProject() {
 			});
 		} else {
 			console.log("Optimize " + id + " is being closed");
-			document.getElementById(divId).className =
-				"singleOptimize-div notavailable";
+			document.getElementById(divId).className = "singleOptimize-div notavailable";
 			newButton.className = "openOptimize-btn";
 			let updated = project.optimization.map((opti) => {
 				if (opti.title === id) {
@@ -232,42 +227,29 @@ function SingleProject() {
 			},
 			id,
 			"optimization",
+			access,
 		);
 		console.log(project);
 		let optimizeArr = project.optimization.map((obj) => {
 			return (
 				<div
 					className={
-						obj.closed
-							? "singleOptimize-div notavailable"
-							: "singleOptimize-div available"
+						obj.closed ? "singleOptimize-div notavailable" : "singleOptimize-div available"
 					}
 					key={obj.title}
 					id={`Od${obj.title}`}
 				>
 					<div id={`Od2${obj.title}`}>
 						<h5>{obj.title}</h5>
-						<button
-							className='deleteOptimize-btn'
-							id={`Obtn2${obj.title}`}
-							onClick={handleDelete}
-						>
+						<button className='deleteOptimize-btn' id={`Obtn2${obj.title}`} onClick={handleDelete}>
 							Delete
 						</button>
 						{obj.closed ? (
-							<button
-								className='openOptimize-btn'
-								id={`Obtn${obj.title}`}
-								onClick={handleOpen}
-							>
+							<button className='openOptimize-btn' id={`Obtn${obj.title}`} onClick={handleOpen}>
 								Open
 							</button>
 						) : (
-							<button
-								className='closeOptimize-btn'
-								id={`Obtn${obj.title}`}
-								onClick={handleClose}
-							>
+							<button className='closeOptimize-btn' id={`Obtn${obj.title}`} onClick={handleClose}>
 								Close
 							</button>
 						)}
@@ -293,27 +275,20 @@ function SingleProject() {
 			},
 			id,
 			"idea",
+			access,
 		);
 		console.log(project);
 		let extenIdeaArr = project.extendedIdeas.map((obj) => {
 			let secondButton;
 			if (obj.closed) {
 				secondButton = (
-					<button
-						className='closeExtenIdea-btn'
-						id={`Ebtn${obj.title}`}
-						onClick={handleOpen}
-					>
+					<button className='closeExtenIdea-btn' id={`Ebtn${obj.title}`} onClick={handleOpen}>
 						Open
 					</button>
 				);
 			} else {
 				secondButton = (
-					<button
-						className='closeExtenIdea-btn'
-						id={`Ebtn${obj.title}`}
-						onClick={handleClose}
-					>
+					<button className='closeExtenIdea-btn' id={`Ebtn${obj.title}`} onClick={handleClose}>
 						Close
 					</button>
 				);
@@ -321,20 +296,14 @@ function SingleProject() {
 			return (
 				<div
 					className={
-						obj.closed
-							? "singleExtenIdea-div notavailable"
-							: "singleExtenIdea-div available"
+						obj.closed ? "singleExtenIdea-div notavailable" : "singleExtenIdea-div available"
 					}
 					key={obj.title}
 					id={`Ed${obj.title}`}
 				>
 					<div id={`Ed2${obj.title}`}>
 						<h5>{obj.title}</h5>
-						<button
-							className='deleteExtenIdea-btn'
-							id={`Ebtn2${obj.title}`}
-							onClick={handleDelete}
-						>
+						<button className='deleteExtenIdea-btn' id={`Ebtn2${obj.title}`} onClick={handleDelete}>
 							Delete
 						</button>
 						{secondButton}
@@ -345,18 +314,9 @@ function SingleProject() {
 			);
 		});
 		setIdeaDisp(extenIdeaArr);
-	}, [
-		project.openIdeas,
-		project.closedIdeas,
-		project.extendedIdeas,
-		project.extendedIdeas.length,
-	]);
+	}, [project.openIdeas, project.closedIdeas, project.extendedIdeas, project.extendedIdeas.length]);
 	let modal = (
-		<Modal
-			show={showModal[0]}
-			onHide={handleModalClose}
-			className='modal-container'
-		>
+		<Modal show={showModal[0]} onHide={handleModalClose} className='modal-container'>
 			<Modal.Header closeButton>
 				<Modal.Title>Sorry cannot add this optimization</Modal.Title>
 			</Modal.Header>
@@ -367,11 +327,7 @@ function SingleProject() {
 		</Modal>
 	);
 	let modal1 = (
-		<Modal
-			show={showModal[1]}
-			onHide={handleModalClose}
-			className='modal-container'
-		>
+		<Modal show={showModal[1]} onHide={handleModalClose} className='modal-container'>
 			<Modal.Header closeButton>
 				<Modal.Title>Sorry cannot add this idea</Modal.Title>
 			</Modal.Header>
@@ -435,10 +391,7 @@ function SingleProject() {
 						Optimization:{" "}
 						{`${project.openOptimizations} open, ${project.closedOptimizations} closed`}
 					</h5>
-					<h5>
-						Extended Ideas:{" "}
-						{`${project.openIdeas} open, ${project.closedIdeas} closed`}
-					</h5>
+					<h5>Extended Ideas: {`${project.openIdeas} open, ${project.closedIdeas} closed`}</h5>
 				</div>
 			</div>
 			<div className='singleProject-right-div'>

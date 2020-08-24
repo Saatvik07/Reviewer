@@ -12,7 +12,7 @@ const Projects = () => {
 				setProjects(arr);
 			}
 		});
-	}, [access]);
+	}, []);
 	const projectsArray = projects.map((project) => {
 		return (
 			<div className='project-div'>
@@ -63,6 +63,11 @@ const Projects = () => {
 			</div>
 		);
 	});
-	return <div className='projects-container'>{projectsArray}</div>;
+	return (
+		<div className='projects-container'>
+			{projectsArray}
+			{projectsArray.length ? null : <h2 style={{ margin: "50px" }}>Wow soo empty</h2>}
+		</div>
+	);
 };
 export default withRouter(Projects);

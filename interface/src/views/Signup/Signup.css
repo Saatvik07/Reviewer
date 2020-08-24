@@ -44,9 +44,18 @@
 	display: none;
 }
 .message {
-	width: 40%;
+	width: 60%;
 	color: #232323;
+	padding: 50px;
 	margin: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.mail-picture {
+	width: 200px;
+	height: auto;
 }
 .sending {
 	background-color: #ff5714;

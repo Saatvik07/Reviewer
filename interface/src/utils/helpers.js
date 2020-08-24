@@ -216,3 +216,25 @@ export const logoutUser = (access) => {
 		}
 	});
 };
+
+export const verifyUser = (access) => {
+	const fetchOptions = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			authorization: `Bearer ${access}`,
+		},
+	};
+	return fetch(`${baseUrl}/auth/verify`, fetchOptions).then(async (response) => {
+		if (response.status === 403) {
+			return { message: "No access token" };
+		} else if (response.status === 401) {
+			return { message: "Not verified" };
+		} else if (response.ok) {
+			const jsonResponse = await response.json();
+			return { ...jsonResponse, message: "Verified" };
+		} else if (response.status === 404) {
+			return { message: "Verified Already" };
+		}
+	});
+};

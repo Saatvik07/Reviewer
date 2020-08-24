@@ -88,7 +88,7 @@ authRouter.post("/user/create", async (req, res, next) => {
 authRouter.post("/verify", (req, res, next) => {
 	const access_token = req.headers.authorization.split(" ")[1];
 	if (!access_token) {
-		res.status(401).send("No access token");
+		res.status(403).send("No access token");
 	}
 	jwt.verify(access_token, process.env.ACCESS_TOKEN_SECRET, (err, doc) => {
 		if (err) {
@@ -99,47 +99,51 @@ authRouter.post("/verify", (req, res, next) => {
 				if (err) {
 					res.status(401).send("not found in temp user model");
 				} else {
-					const tempUserId = doc._id;
-					const obj = {
-						username: doc.username,
-						email: doc.email,
-						password: doc.password,
-					};
-					const newUser = userModel(obj);
-					newUser.save((error, user) => {
-						if (error) {
-							console.log("Cannot add permanent user", error);
-						} else {
-							const userId = { sub: user._id };
-							const access_token = jwt.sign(userId, process.env.ACCESS_TOKEN_SECRET, {
-								expiresIn: "15m",
-							});
-							const refresh_token = jwt.sign(userId, process.env.REFRESH_TOKEN_SECRET);
-							const refresh_token_array = [refresh_token];
-							userModel.findByIdAndUpdate(
-								user._id,
-								{ refreshTokens: refresh_token_array },
-								{ new: true },
-								(error, result) => {
-									if (error) {
-										console.log("Cannot save the refresh token");
-									} else {
-										tempUserModel.findByIdAndDelete(tempUserId, (err, doc) => {
-											if (err) {
-												console.log("Cannot delete Temporary User");
-												res.sendStatus(500);
-											}
-										});
-										const sessionID = crypto.randomBytes(32).toString("hex");
-										res.cookie(`refresh_token${sessionID}`, refresh_token, { httpOnly: true });
-										return res
-											.status(201)
-											.send({ access_token: access_token, sessionID: sessionID });
-									}
-								},
-							);
-						}
-					});
+					if (!doc._id) {
+						res.status(404).send("Email verified already");
+					} else {
+						const tempUserId = doc._id;
+						const obj = {
+							username: doc.username,
+							email: doc.email,
+							password: doc.password,
+						};
+						const newUser = userModel(obj);
+						newUser.save((error, user) => {
+							if (error) {
+								console.log("Cannot add permanent user", error);
+							} else {
+								const userId = { sub: user._id };
+								const access_token = jwt.sign(userId, process.env.ACCESS_TOKEN_SECRET, {
+									expiresIn: "15m",
+								});
+								const refresh_token = jwt.sign(userId, process.env.REFRESH_TOKEN_SECRET);
+								const refresh_token_array = [refresh_token];
+								userModel.findByIdAndUpdate(
+									user._id,
+									{ refreshTokens: refresh_token_array },
+									{ new: true },
+									(error, result) => {
+										if (error) {
+											console.log("Cannot save the refresh token");
+										} else {
+											tempUserModel.findByIdAndDelete(tempUserId, (err, doc) => {
+												if (err) {
+													console.log("Cannot delete Temporary User");
+													res.sendStatus(500);
+												}
+											});
+											const sessionID = crypto.randomBytes(32).toString("hex");
+											res.cookie(`refresh_token${sessionID}`, refresh_token, { httpOnly: true });
+											return res
+												.status(201)
+												.send({ access_token: access_token, sessionID: sessionID });
+										}
+									},
+								);
+							}
+						});
+					}
 				}
 			});
 		}

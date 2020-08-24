@@ -13,8 +13,6 @@ const DashBoard = () => {
 	const [name, setName] = useState("");
 	const [startDate, setStartDate] = useState("");
 	const [endDate, setEndDate] = useState("");
-	const [optimization, setOptimization] = useState("");
-	const [extendedIdeas, setExtendedIdeas] = useState("");
 	const [link, setLink] = useState("");
 	const [github, setGithub] = useState("");
 	const [ideas, setIdeas] = useState([]);
@@ -56,7 +54,6 @@ const DashBoard = () => {
 				}
 			});
 		}
-		console.log(sessionStorage.getItem("sessionID"));
 	}, [access]);
 	function onSaveIdeaClick() {
 		if (!update) {
@@ -69,7 +66,19 @@ const DashBoard = () => {
 				arr.push(idea);
 				showIdeaModal = 1;
 				setIdeas(arr);
-				setShowModal(true);
+				setShowModal(
+					<Modal show={true} onHide={handleCloseModal}>
+						<Modal.Header closeButton>
+							<Modal.Title>Saved</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>The idea ({`${ideaTitle}`}) has been saved successfully</Modal.Body>
+						<Modal.Footer>
+							<Button variant='secondary' onClick={handleCloseModal}>
+								Close
+							</Button>
+						</Modal.Footer>
+					</Modal>,
+				);
 				setIdeaTitle("");
 				setIdeaBody("");
 			});
@@ -102,15 +111,28 @@ const DashBoard = () => {
 			githubRepo: github,
 			startDate: startDate,
 			endDate: endDate,
-			optimization: optimization,
-			extendedIdeas: extendedIdeas,
+			optimization: [],
+			extendedIdeas: [],
 			screenshotUrl: screenshotUrl,
 			logoUrl: logoUrl,
 		};
 		addProject(project, access).then((response) => {
 			if (response.name) {
 				showProjectModal = 1;
-				setShowModal(true);
+				setShowModal(
+					<Modal show={true} onHide={handleCloseModal}>
+						<Modal.Header closeButton>
+							<Modal.Title>Saved</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>The project ({`${name}`}) has been saved successfully</Modal.Body>
+						<Modal.Footer>
+							<Button variant='secondary' onClick={handleCloseModal}>
+								Close
+							</Button>
+							<Button variant='primary'>Understood</Button>
+						</Modal.Footer>
+					</Modal>,
+				);
 			}
 		});
 	}
@@ -205,7 +227,6 @@ const DashBoard = () => {
 	function onClickDelete(event) {
 		const idDelete = event.target.id.slice(2);
 		deleteIdea(idDelete, access).then((response) => {
-			console.log(response);
 			getIdea(access).then((response) => {
 				if (response) {
 					setIdeas(JSON.parse(JSON.stringify(response)));
@@ -214,7 +235,7 @@ const DashBoard = () => {
 		});
 	}
 	function handleCloseModal() {
-		setShowModal(false);
+		setShowModal(null);
 	}
 	function setFormDataForScreenshot() {
 		const data = new FormData();
@@ -256,7 +277,6 @@ const DashBoard = () => {
 				return result.url;
 			});
 	}
-	let modal;
 	const ideasArray = ideas.map((idea) => {
 		return (
 			<div className='idea-div' id={`d${idea._id}`} key={`${idea._id}`}>
@@ -277,38 +297,38 @@ const DashBoard = () => {
 			</div>
 		);
 	});
-	if (showIdeaModal === 1) {
-		showIdeaModal = 0;
-		modal = (
-			<Modal show={showModal} onHide={handleCloseModal}>
-				<Modal.Header closeButton>
-					<Modal.Title>Saved</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>The idea ({`${ideaTitle}`}) has been saved successfully</Modal.Body>
-				<Modal.Footer>
-					<Button variant='secondary' onClick={handleCloseModal}>
-						Close
-					</Button>
-				</Modal.Footer>
-			</Modal>
-		);
-	} else if (showProjectModal === 1) {
-		showProjectModal = 0;
-		modal = (
-			<Modal show={showModal} onHide={handleCloseModal}>
-				<Modal.Header closeButton>
-					<Modal.Title>Saved</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>The project ({`${name}`}) has been saved successfully</Modal.Body>
-				<Modal.Footer>
-					<Button variant='secondary' onClick={handleCloseModal}>
-						Close
-					</Button>
-					<Button variant='primary'>Understood</Button>
-				</Modal.Footer>
-			</Modal>
-		);
-	}
+	// if (showIdeaModal === 1) {
+	// 	showIdeaModal = 0;
+	// 	modal = (
+	// 		<Modal show={showModal} onHide={handleCloseModal}>
+	// 			<Modal.Header closeButton>
+	// 				<Modal.Title>Saved</Modal.Title>
+	// 			</Modal.Header>
+	// 			<Modal.Body>The idea ({`${ideaTitle}`}) has been saved successfully</Modal.Body>
+	// 			<Modal.Footer>
+	// 				<Button variant='secondary' onClick={handleCloseModal}>
+	// 					Close
+	// 				</Button>
+	// 			</Modal.Footer>
+	// 		</Modal>
+	// 	);
+	// } else if (showProjectModal === 1) {
+	// 	showProjectModal = 0;
+	// 	modal = (
+	// 		<Modal show={showModal} onHide={handleCloseModal}>
+	// 			<Modal.Header closeButton>
+	// 				<Modal.Title>Saved</Modal.Title>
+	// 			</Modal.Header>
+	// 			<Modal.Body>The project ({`${name}`}) has been saved successfully</Modal.Body>
+	// 			<Modal.Footer>
+	// 				<Button variant='secondary' onClick={handleCloseModal}>
+	// 					Close
+	// 				</Button>
+	// 				<Button variant='primary'>Understood</Button>
+	// 			</Modal.Footer>
+	// 		</Modal>
+	// 	);
+	// }
 	return (
 		<div className='dashboard-container'>
 			<div className='addProject-container'>
@@ -472,7 +492,7 @@ const DashBoard = () => {
 				</h2>
 				<div className='ideasDisplay'>{ideasArray}</div>
 			</div>
-			{modal}
+			{showModal}
 		</div>
 	);
 };

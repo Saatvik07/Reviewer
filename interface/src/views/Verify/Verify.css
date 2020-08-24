@@ -1,0 +1,19 @@
+.verification-container,
+.verified {
+	display: flex;
+	justify-items: center;
+	align-content: center;
+	width: 70%;
+	flex-direction: column;
+	margin: 50px auto;
+	text-align: center;
+}
+.verification-ongoing {
+	color: orange;
+}
+.verification-complete {
+	color: lightgreen;
+}
+.verification-incomplete {
+	color: red;
+}
