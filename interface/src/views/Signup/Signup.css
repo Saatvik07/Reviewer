@@ -2,8 +2,8 @@
 	margin: 0 auto;
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 	align-items: center;
-	flex-direction: column;
 	color: #ff5714;
 }
 .signup-div {
@@ -24,17 +24,11 @@
 	padding: 10px;
 	margin: 30px auto;
 }
-.signup-btn {
-	display: block;
-	background-color: #151515;
-	color: #ff5714;
-	padding: 10px;
-	font-size: 15px;
-	border: none;
-}
-.signup-btn:hover {
+.signup-btn::part(base) {
 	background-color: #232323;
-	transition: background-color 0.5s linear;
+	color: #ff5714;
+	border: 2px solid #232323;
+	margin: 30px 0;
 }
 ::placeholder {
 	color: #ff5714;
@@ -68,4 +62,47 @@
 }
 .signup-container h2 {
 	margin-top: 30px;
+}
+.inputs {
+	width: 75%;
+	margin: 30px 0;
+	color: #ff5714;
+}
+.inputs::part(base) {
+	background-color: #232323 !important;
+	border: 2px #232323 solid !important;
+	color: #ff5714;
+}
+.inputs::part(input) {
+	color: #ff5714 !important;
+}
+.signup-form {
+	margin: 50px;
+	width: 80%;
+}
+.signup-form::part(base) {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.customBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 50px;
+}
+.successful {
+	margin: 50px 0;
+}
+.successful::part(base) {
+	background-color: #151515 !important;
+	border: 2px #232323 solid !important;
+	border-top: 5px green solid !important;
+	color: #ff5714;
+}
+@media only screen and (max-width: 1020px) {
+	.signup-container {
+		flex-direction: column;
+	}
 }

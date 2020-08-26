@@ -2,13 +2,27 @@ import React, { useState } from "react";
 import "./Signup.css";
 import { withRouter } from "react-router-dom";
 import { registerUser, registerUserGoogle } from "../../utils/helpers";
-import Mail from "./mail.png";
 import GoogleLogo from "./googleLogo.png";
+import {
+	ShoelaceInput,
+	ShoelaceForm,
+	ShoelaceButton,
+	ShoelaceIcon,
+	ShoelaceAlert,
+} from "../../utils/ShoelaceComponents";
+import Mail from "./mail.png";
 const Signup = () => {
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [type, setType] = useState(null);
+	const [type, setType] = useState(
+		<ShoelaceAlert type='success' className='successful' open>
+			<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
+			<strong>Your changes have been saved</strong>
+			<br />
+			You can safely exit the app now.
+		</ShoelaceAlert>,
+	);
 
 	function onClickSignUp() {
 		setType(
@@ -39,11 +53,44 @@ const Signup = () => {
 			window.location.href = url;
 		});
 	}
-
 	return (
 		<div className='signup-container'>
-			<h2>SignUp</h2>
-			<input
+			<div
+				style={{
+					width: "40%",
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					flexDirection: "column",
+					backgroundColor: "#151515",
+					margin: "50px",
+				}}
+			>
+				<h2>SignUp</h2>
+				<ShoelaceForm
+					className='signup-form'
+					onSlSubmit={(event) => {
+						console.log(event.detail.formData.getAll("username"));
+					}}
+				>
+					<ShoelaceInput label='Username' name='username' className='inputs' />
+					<ShoelaceInput label='Email' name='email' className='inputs' type='email' />
+					<ShoelaceInput
+						label='Password'
+						name='password'
+						className='inputs'
+						type='password'
+						togglePassword={true}
+					/>
+
+					<ShoelaceButton className='signup-btn' size='large' pill submit>
+						<ShoelaceIcon slot='prefix' name='check-circle'></ShoelaceIcon>
+						Submit
+					</ShoelaceButton>
+				</ShoelaceForm>
+			</div>
+
+			{/* <input
 				id='username'
 				type='text'
 				className='signup-input'
@@ -52,7 +99,7 @@ const Signup = () => {
 				onChange={(event) => {
 					setUsername(event.target.value);
 				}}
-			/>
+			/> 
 			<input
 				id='email'
 				type='email'
@@ -75,17 +122,20 @@ const Signup = () => {
 			/>
 			<button className='signup-btn' onClick={onClickSignUp}>
 				Sign Up
-			</button>
-			<br />
-			<h3>OR</h3>
-			<div id='customBtn' class='customGPlusSignIn' onClick={clickGoogle}>
-				<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
-				<span class='buttonText'>Google</span>
+			</button> */}
+			<div style={{ margin: "50px" }}>
+				<h3>OR</h3>
 			</div>
-			<h4>
-				Already have an account ? <a href='http://localhost:3000/login'>Sign-in</a>
-			</h4>
-			{type}
+			<div className='signup-left-div'>
+				<div id='customBtn' onClick={clickGoogle}>
+					<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
+					<span class='buttonText'>Google</span>
+				</div>
+				<h4>
+					Already have an account ? <a href='http://localhost:3000/login'>Sign-in</a>
+				</h4>
+				{type}
+			</div>
 		</div>
 	);
 };
