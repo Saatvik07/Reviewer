@@ -9,40 +9,34 @@ import {
 	ShoelaceButton,
 	ShoelaceIcon,
 	ShoelaceAlert,
+	ShoelaceSpinner,
 } from "../../utils/ShoelaceComponents";
-import Mail from "./mail.png";
 const Signup = () => {
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [type, setType] = useState(
-		<ShoelaceAlert type='success' className='successful' open>
-			<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
-			<strong>Your changes have been saved</strong>
-			<br />
-			You can safely exit the app now.
-		</ShoelaceAlert>,
-	);
+	const [type, setType] = useState(null);
 
-	function onClickSignUp() {
-		setType(
-			<div className='message sending'>
-				<h4>Sending the verification mail ...</h4>
-			</div>,
-		);
+	function onClickSignUp(formData) {
+		const username = formData.get("username");
+		const password = formData.get("password");
+		const email = formData.get("email");
+		setType(<ShoelaceSpinner className='sending'></ShoelaceSpinner>);
 		registerUser(username, email, password).then((result) => {
 			if (result.message === "sent") {
 				setType(
-					<div className='message sent'>
-						<img src={Mail} className='mail-picture' />
-						<h4>Check your email {email} for a verification message</h4>
-					</div>,
+					<ShoelaceAlert type='success' className='successful' open>
+						<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
+						<strong>Email sent to {`${email}`}</strong>
+						<br />
+						You can close this window
+					</ShoelaceAlert>,
 				);
 			} else if (result.message === "already in use") {
 				setType(
-					<div className='message already'>
-						<h4>That email ID is already in use</h4>
-					</div>,
+					<ShoelaceAlert type='warning' className='unsuccessful' open>
+						<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
+						<strong>Delete this file?</strong>
+						<br />
+						This is permanent, which means forever
+					</ShoelaceAlert>,
 				);
 			}
 		});
@@ -55,22 +49,12 @@ const Signup = () => {
 	}
 	return (
 		<div className='signup-container'>
-			<div
-				style={{
-					width: "40%",
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					flexDirection: "column",
-					backgroundColor: "#151515",
-					margin: "50px",
-				}}
-			>
+			<div className='signup-left-div'>
 				<h2>SignUp</h2>
 				<ShoelaceForm
 					className='signup-form'
 					onSlSubmit={(event) => {
-						console.log(event.detail.formData.getAll("username"));
+						onClickSignUp(event.detail.formData);
 					}}
 				>
 					<ShoelaceInput label='Username' name='username' className='inputs' />
@@ -123,14 +107,17 @@ const Signup = () => {
 			<button className='signup-btn' onClick={onClickSignUp}>
 				Sign Up
 			</button> */}
-			<div style={{ margin: "50px" }}>
+			<div style={{ marginLeft: "50px" }}>
 				<h3>OR</h3>
 			</div>
-			<div className='signup-left-div'>
+			<div className='signup-right-div'>
+				<h4>Sign In using:</h4>
 				<div id='customBtn' onClick={clickGoogle}>
 					<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
 					<span class='buttonText'>Google</span>
 				</div>
+				<br />
+				<br />
 				<h4>
 					Already have an account ? <a href='http://localhost:3000/login'>Sign-in</a>
 				</h4>

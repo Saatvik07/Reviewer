@@ -77,7 +77,7 @@ authRouter.post("/user/create", async (req, res, next) => {
 						console.log(`Sent email to ${req.body.email}`);
 					}
 				});
-				res.sendStatus(201);
+				res.status(201).send({ email: req.body.email });
 			}
 		});
 	} catch (error) {
@@ -371,7 +371,7 @@ authRouter.post("/login", async (req, res, next) => {
 					}
 				} catch {
 					console.log(doc);
-					res.sendStatus(500);
+					res.sendStatus(403);
 				}
 			} else {
 				res.sendStatus(404);

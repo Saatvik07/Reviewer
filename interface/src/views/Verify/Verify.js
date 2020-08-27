@@ -25,9 +25,10 @@ function Verify() {
 				);
 				setAccess(result.access_token);
 				sessionStorage.setItem("sessionID", result.sessionID);
+				console.log(result.sessionID);
 				setTimeout(() => {
 					history.push("/dashboard");
-				}, 3000);
+				}, 5000);
 			} else if (result.message === "Verified Already") {
 				setVerifying(null);
 				setVerified(

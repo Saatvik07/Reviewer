@@ -1,9 +1,48 @@
 .App {
-  min-height: 100vh;
-  min-width: 100vw;
-  background-color: #232323;
+	min-height: 100vh;
+	min-width: 100vw;
+	background-color: #232323;
 }
 body {
-  background-color: #232323;
-  box-sizing: border-box;
+	background-color: #232323;
+	box-sizing: border-box;
+}
+sl-select,
+sl-color-picker,
+sl-alert,
+sl-dialog,
+sl-drawer,
+sl-tab-group,
+sl-avatar,
+sl-details,
+sl-image-comparer,
+sl-menu-item,
+sl-animation,
+sl-badge,
+sl-button-group,
+sl-card,
+sl-checkbox,
+sl-form,
+sl-menu-divider,
+sl-menu-label,
+sl-progress-bar,
+sl-progress-ring,
+sl-radio,
+sl-range,
+sl-rating,
+sl-skeleton,
+sl-switch,
+sl-tab,
+sl-tab-panel,
+sl-textarea,
+sl-tooltip,
+sl-button,
+sl-icon,
+sl-tag,
+sl-menu,
+sl-spinner,
+sl-input,
+sl-dropdown,
+sl-icon-button {
+	visibility: visible !important;
 }

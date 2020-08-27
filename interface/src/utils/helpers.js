@@ -167,7 +167,8 @@ export const registerUser = (username, email, password) => {
 	};
 	return fetch(`${baseUrl}/auth/user/create`, fetchOptions).then(async (response) => {
 		if (response.ok) {
-			return { message: "sent" };
+			const jsonResponse = await response.json();
+			return { message: "sent", email: jsonResponse.email };
 		} else if (response.status === 403) {
 			return { message: "already in use" };
 		}
@@ -193,9 +194,12 @@ export const loginUser = (email, password) => {
 	};
 	return fetch(`${baseUrl}/auth/login`, fetchOptions).then(async (response) => {
 		if (response.ok) {
-			return await response.json();
+			const jsonResponse = await response.json();
+			return jsonResponse;
 		} else if (response.status === 404) {
 			return { message: "not found" };
+		} else if (response.status === 403) {
+			return { message: "wrong password" };
 		}
 	});
 };
@@ -224,6 +228,7 @@ export const verifyUser = (access) => {
 			"Content-Type": "application/json",
 			authorization: `Bearer ${access}`,
 		},
+		credentials: "include",
 	};
 	return fetch(`${baseUrl}/auth/verify`, fetchOptions).then(async (response) => {
 		if (response.status === 403) {
