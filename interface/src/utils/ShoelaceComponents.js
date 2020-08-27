@@ -9,3 +9,4 @@ export const ShoelaceTabPanel = wrapCustomElement("sl-tab-panel");
 export const ShoelaceDialog = wrapCustomElement("sl-dialog");
 export const ShoelaceForm = wrapCustomElement("sl-form");
 export const ShoelaceSpinner = wrapCustomElement("sl-spinner");
+export const ShoelaceAnimation = wrapCustomElement("sl-animation");

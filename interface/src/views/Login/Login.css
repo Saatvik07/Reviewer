@@ -4,7 +4,7 @@
 	color: #ff5714;
 	width: 190px;
 	border-radius: 5px;
-	border: thin solid #ff5714;
+	border: thin solid #151515;
 	box-shadow: 1px 1px 1px #151515;
 	margin: 30px;
 	white-space: nowrap;
@@ -32,4 +32,31 @@ span.buttonText {
 	font-weight: bold;
 	/* Use the Roboto font that is loaded in the <head> */
 	font-family: "Roboto", sans-serif;
+}
+.login-container {
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #151515;
+	margin: 50px auto;
+	color: #ff5714;
+	padding: 20px;
+}
+.login-form {
+	width: 80%;
+}
+
+.login-form::part(base) {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.loggedIn::part(base) {
+	background-color: #151515 !important;
+	border: 2px #232323 solid !important;
+	border-top: 5px orange solid !important;
+	color: #ff5714;
 }

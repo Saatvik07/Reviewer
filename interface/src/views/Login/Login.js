@@ -3,18 +3,46 @@ import "./Login.css";
 import { userContext } from "../App/App";
 import { useHistory, withRouter } from "react-router-dom";
 import GoogleLogo from "./googleLogo.png";
-import { loginUser, registerUserGoogle } from "../../utils/helpers";
+import { loginUser } from "../../utils/helpers";
+import {
+	ShoelaceAlert,
+	ShoelaceIcon,
+	ShoelaceAnimation,
+	ShoelaceButton,
+	ShoelaceInput,
+	ShoelaceForm,
+} from "../../utils/ShoelaceComponents";
 function Login() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [type, setType] = useState(0);
+	const [type, setType] = useState(null);
 	const { access, setAccess } = useContext(userContext);
 	const history = useHistory();
 	let prompt;
-	function onClickLogin() {
+	function onClickLogin(formData) {
+		const email = formData.get("email");
+		const password = formData.get("email");
 		loginUser(email, password).then((response) => {
-			if (response.message) {
-				setType(1);
+			if (response.message === "not found") {
+				setType(
+					<ShoelaceAnimation name='shake' duration='2000' iterations='1'>
+						<ShoelaceAlert type='warning' open className='loggedIn'>
+							<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
+							<strong>Sorry :|</strong>
+							<br />
+							The email entered is not registered
+						</ShoelaceAlert>
+					</ShoelaceAnimation>,
+				);
+			} else if (response.message === "wrong password") {
+				setType(
+					<ShoelaceAnimation name='shake' duration='2000' iterations='1'>
+						<ShoelaceAlert type='warning' open className='loggedIn'>
+							<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
+							<strong>Uh Oh!!!</strong>
+							<br />
+							The password is incorrect
+						</ShoelaceAlert>
+					</ShoelaceAnimation>,
+				);
 			} else {
 				localStorage.setItem("sessionID", response.sessionID);
 				setAccess(response.access_token);
@@ -22,49 +50,29 @@ function Login() {
 			}
 		});
 	}
-	function clickGoogle() {
-		registerUserGoogle().then((response) => {
-			const url = response.authURL;
-			window.location.href = url;
-		});
-	}
-	if (type === 1) {
-		prompt = <h3>This email ID is not registered</h3>;
-	}
 	return (
-		<div className='signup-container'>
-			<h1>Login</h1>
-			<input
-				id='email'
-				type='email'
-				className='signup-input'
-				placeholder='Enter the email'
-				value={email}
-				onChange={(event) => {
-					setEmail(event.target.value);
+		<div className='login-container'>
+			<h1>Sign-in</h1>
+			<ShoelaceForm
+				className='login-form'
+				onSlSubmit={(event) => {
+					onClickLogin(event.detail.formData);
 				}}
-			/>
-			<input
-				id='password'
-				type='password'
-				className='signup-input'
-				placeholder='Enter the password'
-				value={password}
-				onChange={(event) => {
-					setPassword(event.target.value);
-				}}
-			/>
-			<button className='signup-btn' onClick={onClickLogin}>
-				Log In
-			</button>
-			<br />
-			<br />
-			<h3>OR</h3>
-			<span class='label'>Sign in with:</span>
-			<div id='customBtn' class='customGPlusSignIn' onClick={clickGoogle}>
-				<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
-				<span class='buttonText'>Google</span>
-			</div>
+			>
+				<ShoelaceInput label='Email' name='email' className='inputs' type='email' />
+				<ShoelaceInput
+					label='Password'
+					name='password'
+					className='inputs'
+					type='password'
+					togglePassword={true}
+				/>
+				<ShoelaceButton className='signup-btn' size='large' pill submit>
+					<ShoelaceIcon slot='prefix' name='check-circle'></ShoelaceIcon>
+					Submit
+				</ShoelaceButton>
+			</ShoelaceForm>
+			{type}
 		</div>
 	);
 }

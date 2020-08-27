@@ -10,9 +10,10 @@ import {
 	ShoelaceIcon,
 	ShoelaceAlert,
 	ShoelaceSpinner,
+	ShoelaceAnimation,
 } from "../../utils/ShoelaceComponents";
 const Signup = () => {
-	const [type, setType] = useState(null);
+	const [type, setType] = useState();
 
 	function onClickSignUp(formData) {
 		const username = formData.get("username");
@@ -22,21 +23,25 @@ const Signup = () => {
 		registerUser(username, email, password).then((result) => {
 			if (result.message === "sent") {
 				setType(
-					<ShoelaceAlert type='success' className='successful' open>
-						<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
-						<strong>Email sent to {`${email}`}</strong>
-						<br />
-						You can close this window
-					</ShoelaceAlert>,
+					<ShoelaceAnimation name='shake' duration='2000' iterations='1'>
+						<ShoelaceAlert type='success' className='successful' open>
+							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
+							<strong>Email sent to {`${email}`}</strong>
+							<br />
+							You can close this window
+						</ShoelaceAlert>
+					</ShoelaceAnimation>,
 				);
 			} else if (result.message === "already in use") {
 				setType(
-					<ShoelaceAlert type='warning' className='unsuccessful' open>
-						<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
-						<strong>Delete this file?</strong>
-						<br />
-						This is permanent, which means forever
-					</ShoelaceAlert>,
+					<ShoelaceAnimation name='shake' duration='2000' iterations='1'>
+						<ShoelaceAlert type='warning' className='unsuccessful' open>
+							<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
+							<strong>Delete this file?</strong>
+							<br />
+							This is permanent, which means forever
+						</ShoelaceAlert>
+					</ShoelaceAnimation>,
 				);
 			}
 		});
