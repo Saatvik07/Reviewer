@@ -109,24 +109,24 @@
 	align-items: center;
 	margin: 50px;
 }
-.successful,
-.unsuccessful,
-.sending {
+.email-successful,
+.email-unsuccessful,
+.email-sending {
 	margin: 50px 0;
 }
-.successful::part(base) {
+.email-successful::part(base) {
 	background-color: #151515 !important;
 	border: 2px #232323 solid !important;
 	border-top: 5px green solid !important;
 	color: #ff5714;
 }
-.unsuccessful::part(base) {
+.email-unsuccessful::part(base) {
 	background-color: #151515 !important;
 	border: 2px #232323 solid !important;
 	border-top: 5px orange solid !important;
 	color: #ff5714;
 }
-.sending {
+.email-sending {
 	--indicator-color: orange;
 	font-size: 60px;
 }

@@ -13,6 +13,7 @@
 	flex-wrap: wrap;
 	width: 90%;
 	margin: 30px auto;
+	min-height: 20vh;
 	max-height: 60vh;
 	overflow-y: scroll;
 	background-color: #151515;
@@ -50,7 +51,8 @@ textarea.addIdea-input {
 	margin: 30px auto;
 }
 textarea.addIdea-input {
-	height: 45vh;
+	height: 40vh;
+	resize: none;
 }
 .screenshot {
 	width: auto;
@@ -175,6 +177,24 @@ input[type="file"] {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+.savedIdea-successful {
+	margin: 30px;
+	width: 70%;
+	font-size: 2rem;
+}
+.savedIdea-successful::part(base) {
+	background-color: #151515 !important;
+	border: 2px #232323 solid !important;
+	border-top: 5px green solid !important;
+	color: #ff5714;
+}
+.modal-closeBtn::part(base) {
+	color: #ff5714;
+	transition: all 0.5s linear;
+}
+.modal-closeBtn::part(base):hover {
+	color: orange;
 }
 @media only screen and (max-width: 1020px) {
 	.addProject-container {

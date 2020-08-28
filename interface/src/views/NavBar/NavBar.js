@@ -14,47 +14,67 @@ function NavBar() {
 	return (
 		<div className='navbar-container'>
 			<div className='nav-options'>
-				<Link to='/dashboard'>
-					<button
-						className='nav-btn'
-						onClick={(event) => {
-							setNav(event.target.id);
-						}}
-						id='dashboard'
-					>
-						Dashboard
-					</button>
-				</Link>
-				<Link to='/projects'>
-					<button
-						className='nav-btn'
-						onClick={(event) => {
-							setNav(event.target.id);
-						}}
-						id='projects'
-						disabled={access ? false : true}
-					>
-						Projects
-					</button>
-				</Link>
-
-				<Link to='/'>
-					{access ? (
-						<button className='nav-btn' onClick={logOut} id='log'>
-							Log Out
-						</button>
-					) : (
-						<button
-							className='nav-btn'
-							onClick={(event) => {
-								setNav(event.target.id);
-							}}
-							id='log'
-						>
-							Log In
-						</button>
-					)}
-				</Link>
+				{access ? (
+					<>
+						<Link to='/dashboard'>
+							<button
+								className='nav-btn'
+								onClick={(event) => {
+									setNav(event.target.id);
+								}}
+								id='dashboard'
+							>
+								Dashboard
+							</button>
+						</Link>
+						<Link to='/projects'>
+							<button
+								className='nav-btn'
+								onClick={(event) => {
+									setNav(event.target.id);
+								}}
+								id='projects'
+							>
+								Projects
+							</button>
+						</Link>
+						<Link to='/'>
+							{access ? (
+								<button className='nav-btn' onClick={logOut} id='log'>
+									Log Out
+								</button>
+							) : (
+								<button
+									className='nav-btn'
+									onClick={(event) => {
+										setNav(event.target.id);
+									}}
+									id='log'
+								>
+									Log Out
+								</button>
+							)}
+						</Link>{" "}
+					</>
+				) : (
+					<Link to='/'>
+						{access ? (
+							<button className='nav-btn' onClick={logOut} id='log'>
+								Log Out
+							</button>
+						) : (
+							<button
+								className='nav-btn'
+								onClick={(event) => {
+									setNav(event.target.id);
+								}}
+								id='log'
+							>
+								Log In
+							</button>
+						)}
+					</Link>
+				)}
 			</div>
 		</div>
 	);

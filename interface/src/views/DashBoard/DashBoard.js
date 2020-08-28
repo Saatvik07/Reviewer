@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./DashBoard.css";
-import { Modal, Button } from "react-bootstrap";
 import { withRouter, useLocation } from "react-router-dom";
 import { addProject, addIdea, getIdea, updateIdea, deleteIdea } from "../../utils/helpers";
 import { userContext } from "../App/App";
+import {
+	ShoelaceDialog,
+	ShoelaceButton,
+	ShoelaceAnimation,
+	ShoelaceAlert,
+	ShoelaceIcon,
+	ShoelaceIconButton,
+} from "../../utils/ShoelaceComponents";
 let showIdeaModal = 0,
 	showProjectModal = 0;
 function useQuery() {
@@ -20,7 +27,7 @@ const DashBoard = () => {
 	const [ideaBody, setIdeaBody] = useState("");
 	const [update, setUpdate] = useState(0);
 	const [updateId, setUpdateId] = useState("");
-	const [showModal, setShowModal] = useState(false);
+	const [showModal, setShowModal] = useState(null);
 	const [screenshot, setScreenshot] = useState("");
 	const [logo, setLogo] = useState("");
 	const { access, setAccess } = useContext(userContext);
@@ -67,17 +74,24 @@ const DashBoard = () => {
 				showIdeaModal = 1;
 				setIdeas(arr);
 				setShowModal(
-					<Modal show={true} onHide={handleCloseModal}>
-						<Modal.Header closeButton>
-							<Modal.Title>Saved</Modal.Title>
-						</Modal.Header>
-						<Modal.Body>The idea ({`${ideaTitle}`}) has been saved successfully</Modal.Body>
-						<Modal.Footer>
-							<Button variant='secondary' onClick={handleCloseModal}>
-								Close
-							</Button>
-						</Modal.Footer>
-					</Modal>,
+					<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
+						<ShoelaceAlert type='success' className='savedIdea-successful' open>
+							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
+							<strong>Saved !!!</strong>
+							<ShoelaceIconButton
+								name='x-circle-fill'
+								className='modal-closeBtn'
+								size='large'
+								style={{ marginLeft: "60%" }}
+								onClick={() => {
+									setShowModal(null);
+								}}
+							></ShoelaceIconButton>
+							<br />
+							The idea {ideaTitle} has been saved
+							<br />
+						</ShoelaceAlert>
+					</ShoelaceAnimation>,
 				);
 				setIdeaTitle("");
 				setIdeaBody("");
@@ -92,6 +106,26 @@ const DashBoard = () => {
 				const updatedArray = ideas;
 				updatedArray.push(idea);
 				setIdeas(updatedArray);
+				setShowModal(
+					<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
+						<ShoelaceAlert type='success' className='savedIdea-successful' open>
+							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
+							<strong>Updated !!!</strong>
+							<ShoelaceIconButton
+								name='x-circle-fill'
+								className='modal-closeBtn'
+								size='large'
+								style={{ marginLeft: "60%" }}
+								onClick={() => {
+									setShowModal(null);
+								}}
+							></ShoelaceIconButton>
+							<br />
+							The idea {ideaTitle} has been updated
+							<br />
+						</ShoelaceAlert>
+					</ShoelaceAnimation>,
+				);
 				setIdeaTitle("");
 				setIdeaBody("");
 			});
@@ -118,101 +152,30 @@ const DashBoard = () => {
 		};
 		addProject(project, access).then((response) => {
 			if (response.name) {
-				showProjectModal = 1;
 				setShowModal(
-					<Modal show={true} onHide={handleCloseModal}>
-						<Modal.Header closeButton>
-							<Modal.Title>Saved</Modal.Title>
-						</Modal.Header>
-						<Modal.Body>The project ({`${name}`}) has been saved successfully</Modal.Body>
-						<Modal.Footer>
-							<Button variant='secondary' onClick={handleCloseModal}>
-								Close
-							</Button>
-							<Button variant='primary'>Understood</Button>
-						</Modal.Footer>
-					</Modal>,
+					<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
+						<ShoelaceAlert type='success' className='savedIdea-successful' open>
+							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
+							<strong>Saved !!!</strong>
+							<ShoelaceIconButton
+								name='x-circle-fill'
+								className='modal-closeBtn'
+								size='large'
+								style={{ marginLeft: "60%" }}
+								onClick={() => {
+									setShowModal(null);
+								}}
+							></ShoelaceIconButton>
+							<br />
+							The project {name} has been saved
+							<br />
+						</ShoelaceAlert>
+					</ShoelaceAnimation>,
 				);
 			}
 		});
 	}
 
-	// function onChangeUpdatedIdea(event) {
-	// 	console.log(event.target);
-	// 	if (event.target.id === "updateBody") {
-	// 		setUpdateBody(event.target.value);
-	// 	} else if (event.target.id === "updateTitle") {
-	// 		setUpdateTitle(event.target.value);
-	// 	}
-	// }
-	// function onClickUpdate(event) {
-	// 	const ideaDiv = document.getElementById(`d${event.target.id}`);
-	// 	const title = document.getElementById(`h${event.target.id}`).innerText;
-	// 	const body = document.getElementById(`p${event.target.id}`).innerText;
-	// 	const updateButtonId = event.target.id;
-	// 	setUpdateBody(body);
-	// 	setUpdateId(updateButtonId);
-	// 	setUpdateTitle(title);
-	// 	ideaDiv.innerHTML = "";
-	// 	const updateTitleElement = document.createElement("input");
-	// 	updateTitleElement.value = updateTitle;
-	// 	updateTitleElement.id = "updateTitle";
-	// 	updateTitleElement.className = "addIdea-input";
-	// 	updateTitleElement.onchange = (event) => {
-	// 		setUpdateTitle(event.target.value);
-	// 	};
-	// 	const updateBodyElement = document.createElement("textarea");
-	// 	updateBodyElement.id = "updateBody";
-	// 	updateBodyElement.value = updateBody;
-	// 	updateBodyElement.className = "addIdea-input";
-	// 	updateBodyElement.onchange = onChangeUpdatedIdea;
-	// 	const updateButtonElement = document.createElement("button");
-	// 	updateButtonElement.id = updateButtonId;
-	// 	updateButtonElement.onclick = () => {
-	// 		console.log(updateTitle);
-	// 	};
-	// 	updateButtonElement.innerHTML = "Save";
-	// 	ideaDiv.appendChild(updateTitleElement);
-	// 	ideaDiv.appendChild(updateBodyElement);
-	// 	ideaDiv.appendChild(updateButtonElement);
-	// }
-	// function onUpdate() {
-	// 	console.log(updateTitle, "title");
-	// 	const updatedIdea = {
-	// 		title: updateTitle,
-	// 		body: updateBody,
-	// 		_id: updateId,
-	// 	};
-
-	// 	updateIdea(updatedIdea, access).then((response) => {
-	// 		const ideaDiv = document.getElementById(`d${response._id}`);
-	// 		ideaDiv.innerHTML = "";
-	// 		const titleElement = document.createElement("h5");
-	// 		titleElement.id = `h${response._id}`;
-	// 		titleElement.innerText = `${response.title}`;
-	// 		const bodyElement = document.createElement("p");
-	// 		bodyElement.id = `p${response._id}`;
-	// 		bodyElement.innerText = `${response.body}`;
-	// 		bodyElement.className = "idea-body";
-	// 		const button = document.createElement("button");
-	// 		button.id = `${response._id}`;
-	// 		button.innerText = "Update";
-	// 		button.onclick = onClickUpdate;
-	// 		button.className = "update-btn";
-	// 		const delButton = document.createElement("button");
-	// 		delButton.id = `b2${response._id}`;
-	// 		delButton.innerText = "Delete";
-	// 		delButton.onclick = onClickDelete;
-	// 		delButton.className = "delete-btn";
-	// 		const btnDiv = document.createElement("div");
-	// 		btnDiv.className = "btn-div";
-	// 		btnDiv.appendChild(delButton);
-	// 		btnDiv.appendChild(button);
-	// 		ideaDiv.appendChild(titleElement);
-	// 		ideaDiv.appendChild(bodyElement);
-	// 		ideaDiv.appendChild(btnDiv);
-	// 	});
-	// }
 	function onClickUpdateButton(event) {
 		setUpdateId(event.target.id);
 		setIdeaTitle(document.getElementById(`h${event.target.id}`).innerText);
@@ -297,38 +260,6 @@ const DashBoard = () => {
 			</div>
 		);
 	});
-	// if (showIdeaModal === 1) {
-	// 	showIdeaModal = 0;
-	// 	modal = (
-	// 		<Modal show={showModal} onHide={handleCloseModal}>
-	// 			<Modal.Header closeButton>
-	// 				<Modal.Title>Saved</Modal.Title>
-	// 			</Modal.Header>
-	// 			<Modal.Body>The idea ({`${ideaTitle}`}) has been saved successfully</Modal.Body>
-	// 			<Modal.Footer>
-	// 				<Button variant='secondary' onClick={handleCloseModal}>
-	// 					Close
-	// 				</Button>
-	// 			</Modal.Footer>
-	// 		</Modal>
-	// 	);
-	// } else if (showProjectModal === 1) {
-	// 	showProjectModal = 0;
-	// 	modal = (
-	// 		<Modal show={showModal} onHide={handleCloseModal}>
-	// 			<Modal.Header closeButton>
-	// 				<Modal.Title>Saved</Modal.Title>
-	// 			</Modal.Header>
-	// 			<Modal.Body>The project ({`${name}`}) has been saved successfully</Modal.Body>
-	// 			<Modal.Footer>
-	// 				<Button variant='secondary' onClick={handleCloseModal}>
-	// 					Close
-	// 				</Button>
-	// 				<Button variant='primary'>Understood</Button>
-	// 			</Modal.Footer>
-	// 		</Modal>
-	// 	);
-	// }
 	return (
 		<div className='dashboard-container'>
 			<div className='addProject-container'>
@@ -485,14 +416,16 @@ const DashBoard = () => {
 				<button className='addIdea-btn' onClick={onSaveIdeaClick}>
 					Save Idea
 				</button>
+				{showModal}
 			</div>
 			<div className='showIdea-container'>
 				<h2 style={{ color: "#ffba08", textAlign: "center", marginTop: "50px" }}>
 					Potential Projects
 				</h2>
-				<div className='ideasDisplay'>{ideasArray}</div>
+				<div className='ideasDisplay'>
+					{ideasArray.length ? ideasArray : <h1>Wow soo empty</h1>}
+				</div>
 			</div>
-			{showModal}
 		</div>
 	);
 };
@@ -514,3 +447,79 @@ export default withRouter(DashBoard);
               </div>
             </div>
           </div>*/
+// function onChangeUpdatedIdea(event) {
+// 	console.log(event.target);
+// 	if (event.target.id === "updateBody") {
+// 		setUpdateBody(event.target.value);
+// 	} else if (event.target.id === "updateTitle") {
+// 		setUpdateTitle(event.target.value);
+// 	}
+// }
+// function onClickUpdate(event) {
+// 	const ideaDiv = document.getElementById(`d${event.target.id}`);
+// 	const title = document.getElementById(`h${event.target.id}`).innerText;
+// 	const body = document.getElementById(`p${event.target.id}`).innerText;
+// 	const updateButtonId = event.target.id;
+// 	setUpdateBody(body);
+// 	setUpdateId(updateButtonId);
+// 	setUpdateTitle(title);
+// 	ideaDiv.innerHTML = "";
+// 	const updateTitleElement = document.createElement("input");
+// 	updateTitleElement.value = updateTitle;
+// 	updateTitleElement.id = "updateTitle";
+// 	updateTitleElement.className = "addIdea-input";
+// 	updateTitleElement.onchange = (event) => {
+// 		setUpdateTitle(event.target.value);
+// 	};
+// 	const updateBodyElement = document.createElement("textarea");
+// 	updateBodyElement.id = "updateBody";
+// 	updateBodyElement.value = updateBody;
+// 	updateBodyElement.className = "addIdea-input";
+// 	updateBodyElement.onchange = onChangeUpdatedIdea;
+// 	const updateButtonElement = document.createElement("button");
+// 	updateButtonElement.id = updateButtonId;
+// 	updateButtonElement.onclick = () => {
+// 		console.log(updateTitle);
+// 	};
+// 	updateButtonElement.innerHTML = "Save";
+// 	ideaDiv.appendChild(updateTitleElement);
+// 	ideaDiv.appendChild(updateBodyElement);
+// 	ideaDiv.appendChild(updateButtonElement);
+// }
+// function onUpdate() {
+// 	console.log(updateTitle, "title");
+// 	const updatedIdea = {
+// 		title: updateTitle,
+// 		body: updateBody,
+// 		_id: updateId,
+// 	};
+
+// 	updateIdea(updatedIdea, access).then((response) => {
+// 		const ideaDiv = document.getElementById(`d${response._id}`);
+// 		ideaDiv.innerHTML = "";
+// 		const titleElement = document.createElement("h5");
+// 		titleElement.id = `h${response._id}`;
+// 		titleElement.innerText = `${response.title}`;
+// 		const bodyElement = document.createElement("p");
+// 		bodyElement.id = `p${response._id}`;
+// 		bodyElement.innerText = `${response.body}`;
+// 		bodyElement.className = "idea-body";
+// 		const button = document.createElement("button");
+// 		button.id = `${response._id}`;
+// 		button.innerText = "Update";
+// 		button.onclick = onClickUpdate;
+// 		button.className = "update-btn";
+// 		const delButton = document.createElement("button");
+// 		delButton.id = `b2${response._id}`;
+// 		delButton.innerText = "Delete";
+// 		delButton.onclick = onClickDelete;
+// 		delButton.className = "delete-btn";
+// 		const btnDiv = document.createElement("div");
+// 		btnDiv.className = "btn-div";
+// 		btnDiv.appendChild(delButton);
+// 		btnDiv.appendChild(button);
+// 		ideaDiv.appendChild(titleElement);
+// 		ideaDiv.appendChild(bodyElement);
+// 		ideaDiv.appendChild(btnDiv);
+// 	});
+// }

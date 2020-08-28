@@ -19,12 +19,12 @@ const Signup = () => {
 		const username = formData.get("username");
 		const password = formData.get("password");
 		const email = formData.get("email");
-		setType(<ShoelaceSpinner className='sending'></ShoelaceSpinner>);
+		setType(<ShoelaceSpinner className='email-sending'></ShoelaceSpinner>);
 		registerUser(username, email, password).then((result) => {
 			if (result.message === "sent") {
 				setType(
 					<ShoelaceAnimation name='shake' duration='2000' iterations='1'>
-						<ShoelaceAlert type='success' className='successful' open>
+						<ShoelaceAlert type='success' className='email-successful' open>
 							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
 							<strong>Email sent to {`${email}`}</strong>
 							<br />
@@ -35,7 +35,7 @@ const Signup = () => {
 			} else if (result.message === "already in use") {
 				setType(
 					<ShoelaceAnimation name='shake' duration='2000' iterations='1'>
-						<ShoelaceAlert type='warning' className='unsuccessful' open>
+						<ShoelaceAlert type='warning' className='email-unsuccessful' open>
 							<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
 							<strong>Delete this file?</strong>
 							<br />

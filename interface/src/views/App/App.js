@@ -9,6 +9,7 @@ import SingleProject from "../SingleProject/SingleProject";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "../Login/Login";
 import Verify from "../Verify/Verify";
+import About from "../About/About";
 export const userContext = React.createContext(null);
 function App() {
 	useEffect(() => {
@@ -38,7 +39,8 @@ function App() {
 							<NavBar />
 						</div>
 						<div className='content'>
-							<Route exact path='/' component={Signup} />
+							<Route exact path='/' component={About} />
+							<Route path='/signup' component={Signup} />
 							<Route path='/dashboard' component={DashBoard} />
 							<Route path='/projects' component={Projects} />
 							<Route path='/single_project/:id' component={SingleProject} />
