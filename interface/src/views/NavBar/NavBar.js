@@ -8,7 +8,7 @@ function NavBar() {
 	const { access, setAccess } = useContext(userContext);
 	function logOut() {
 		setNav("log");
-
+		setAccess(null);
 		logoutUser(access);
 	}
 	return (
@@ -39,6 +39,25 @@ function NavBar() {
 							</button>
 						</Link>
 						<Link to='/'>
+							<button className='nav-btn' onClick={logOut} id='log'>
+								Log Out
+							</button>
+						</Link>{" "}
+					</>
+				) : (
+					<>
+						<Link to='/signup'>
+							<button
+								className='nav-btn'
+								onClick={(event) => {
+									setNav(event.target.id);
+								}}
+								id='Signup'
+							>
+								Signup
+							</button>
+						</Link>
+						<Link to='/login'>
 							{access ? (
 								<button className='nav-btn' onClick={logOut} id='log'>
 									Log Out
@@ -51,29 +70,11 @@ function NavBar() {
 									}}
 									id='log'
 								>
-									Log Out
+									Log In
 								</button>
 							)}
-						</Link>{" "}
+						</Link>
 					</>
-				) : (
-					<Link to='/'>
-						{access ? (
-							<button className='nav-btn' onClick={logOut} id='log'>
-								Log Out
-							</button>
-						) : (
-							<button
-								className='nav-btn'
-								onClick={(event) => {
-									setNav(event.target.id);
-								}}
-								id='log'
-							>
-								Log In
-							</button>
-						)}
-					</Link>
 				)}
 			</div>
 		</div>

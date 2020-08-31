@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import "./Login.css";
 import { userContext } from "../App/App";
 import { useHistory, withRouter } from "react-router-dom";
-import GoogleLogo from "./googleLogo.png";
 import { loginUser } from "../../utils/helpers";
 import {
 	ShoelaceAlert,
@@ -19,7 +18,7 @@ function Login() {
 	let prompt;
 	function onClickLogin(formData) {
 		const email = formData.get("email");
-		const password = formData.get("email");
+		const password = formData.get("password");
 		loginUser(email, password).then((response) => {
 			if (response.message === "not found") {
 				setType(

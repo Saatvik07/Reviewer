@@ -17,7 +17,7 @@ function Verify() {
 				setVerifying(null);
 				setVerified(
 					<div className='verified'>
-						<img style={{ width: "200px", height: "auto" }} src={Tick} />
+						<img style={{ width: "100px", height: "auto" }} src={Tick} />
 						<h2 className='verification-complete'>
 							Thank you for verifying your email. Redirecting....
 						</h2>
@@ -25,10 +25,9 @@ function Verify() {
 				);
 				setAccess(result.access_token);
 				sessionStorage.setItem("sessionID", result.sessionID);
-				console.log(result.sessionID);
 				setTimeout(() => {
 					history.push("/dashboard");
-				}, 5000);
+				}, 2000);
 			} else if (result.message === "Verified Already") {
 				setVerifying(null);
 				setVerified(

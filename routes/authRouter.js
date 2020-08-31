@@ -341,9 +341,10 @@ authRouter.post("/login", async (req, res, next) => {
 				const userId = doc[0]._id;
 				const userPassword = doc[0].password;
 				const refresh_token_array = doc[0].refreshTokens;
-				try {
-					const result = await bcrypt.compare(req.body.pass, userPassword);
-					if (result) {
+				bcrypt.compare(req.body.password, userPassword, (err, result) => {
+					if (err) {
+						res.sendStatus(403);
+					} else if (result) {
 						const refresh_token = jwt.sign({ sub: userId }, process.env.REFRESH_TOKEN_SECRET);
 						refresh_token_array.push(refresh_token);
 						userModel.findByIdAndUpdate(
@@ -369,10 +370,7 @@ authRouter.post("/login", async (req, res, next) => {
 					} else {
 						res.sendStatus(401);
 					}
-				} catch {
-					console.log(doc);
-					res.sendStatus(403);
-				}
+				});
 			} else {
 				res.sendStatus(404);
 			}

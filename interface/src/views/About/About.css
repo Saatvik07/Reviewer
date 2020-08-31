@@ -1,19 +1,45 @@
 #top-arrow {
 	animation: expand 2s linear alternate infinite;
+	animation-delay: 1s;
 	transform-origin: left;
 	transform-box: fill-box;
 }
 #middle-arrow {
 	animation: expand 2s linear alternate infinite;
+
 	transform-origin: left;
 	transform-box: fill-box;
 }
 #bottom-arrow {
-	animation: expand 2s linear alternate infinite;
+	animation: expand 1s linear alternate infinite;
+	animation-delay: 2s;
 	transform-origin: left;
+
 	transform-box: fill-box;
 }
+.about-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.tab-group {
+	--tabs-border-color: #151515;
+	font-size: 2rem;
+}
+.tab-group::part(base),
+.tab-group::part(active-tab-indicator) {
+	color: #ff5714 !important;
+	font-size: 1.5rem;
+}
+.tab-group::part(nav) {
+	background-color: #232323;
+}
 
+.tab::part(base),
+.tab--active {
+	color: #ff5714;
+	border-bottom-color: #ff5714;
+}
 @keyframes expand {
 	0% {
 		transform: scale(0);
@@ -22,8 +48,11 @@
 		transform: scale(1);
 	}
 }
+.about-rightContainer {
+	width: 40%;
+}
 .about-svg {
-	margin: 30px;
+	margin: 50px;
 }
 @media only screen and (max-width: 720px) {
 	.about-svg {

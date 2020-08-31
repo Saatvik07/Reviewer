@@ -11,3 +11,5 @@ export const ShoelaceForm = wrapCustomElement("sl-form");
 export const ShoelaceSpinner = wrapCustomElement("sl-spinner");
 export const ShoelaceAnimation = wrapCustomElement("sl-animation");
 export const ShoelaceIconButton = wrapCustomElement("sl-icon-button");
+export const ShoelaceTabGroup = wrapCustomElement("sl-tab-group");
+export const ShoelaceTab = wrapCustomElement("sl-tab");

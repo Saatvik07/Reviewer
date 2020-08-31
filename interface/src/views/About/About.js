@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./About.css";
+import { ShoelaceTabPanel, ShoelaceTab, ShoelaceTabGroup } from "../../utils/ShoelaceComponents";
 function About() {
 	const [height, setHeight] = useState(350);
 	const [width, setWidth] = useState(700);
@@ -20,7 +21,7 @@ function About() {
 		}
 	});
 	return (
-		<div>
+		<div className='about-container'>
 			<svg
 				width={width}
 				height={height}
@@ -277,6 +278,18 @@ function About() {
 					</clipPath>
 				</defs>
 			</svg>
+			<div className='about-rightContainer'>
+				<ShoelaceTabGroup className='tab-group' placement='left'>
+					<ShoelaceTab slot='nav' panel='about' className='tab'>
+						About
+					</ShoelaceTab>
+					<ShoelaceTab slot='nav' panel='Tech-Stack' className='tab'>
+						Tech Stack
+					</ShoelaceTab>
+					<ShoelaceTabPanel name='about'>Info about the app</ShoelaceTabPanel>
+					<ShoelaceTabPanel name='Tech-Stack'>MERN</ShoelaceTabPanel>
+				</ShoelaceTabGroup>
+			</div>
 		</div>
 	);
 }

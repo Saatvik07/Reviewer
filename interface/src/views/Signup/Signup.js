@@ -37,9 +37,9 @@ const Signup = () => {
 					<ShoelaceAnimation name='shake' duration='2000' iterations='1'>
 						<ShoelaceAlert type='warning' className='email-unsuccessful' open>
 							<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
-							<strong>Delete this file?</strong>
+							<strong>Such Coincidence</strong>
 							<br />
-							This is permanent, which means forever
+							This email is already in use
 						</ShoelaceAlert>
 					</ShoelaceAnimation>,
 				);
