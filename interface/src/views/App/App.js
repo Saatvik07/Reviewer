@@ -10,6 +10,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "../Login/Login";
 import Verify from "../Verify/Verify";
 import About from "../About/About";
+import ForgotPassword from "../ForgotPassword/ForgotPassword";
+import ResetPassword from "../RresetPassword/ResetPassword";
 export const userContext = React.createContext(null);
 function App() {
 	useEffect(() => {
@@ -46,6 +48,8 @@ function App() {
 							<Route path='/single_project/:id' component={SingleProject} />
 							<Route path='/login' component={Login} />
 							<Route path='/verify/:accessToken' component={Verify} />
+							<Route path='/forgot_password' component={ForgotPassword} />
+							<Route path='/reset_password/:accessToken' component={ResetPassword} />
 						</div>
 					</userContext.Provider>
 				</div>

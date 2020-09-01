@@ -268,7 +268,7 @@ authRouter.post("/forgot_password", (req, res, next) => {
 					to: `${email}`,
 					from: process.env.EMAIL,
 					subject: "Password Change Request",
-					html: `<div style='background-color: #FBAB7E;background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);width:60%;margin:20px auto;padding:50px;'><h1 style="display:block;color:white; margin:20px;font-family:sans-serif">Hi,<h1><h3 style="display:block;margin:20px;font-family:sans-serif;color:white">This is a password reset request for ${doc[0].username}<h3><br><br><a href=${url}><button style="display:block;padding:20px 30px;background-color:white;color:#090979;font-size:16px;font-weight:bold;border:none;border-radius:10px;margin:0px 20px;">Click Here</button></a></div>`,
+					html: `<div style='background-color: #FBAB7E;background-image: linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);width:60%;margin:20px auto;padding:50px;'><h1 style="display:block;color:white; margin:20px;font-family:sans-serif">Hi,<h1><h3 style="display:block;margin:20px;font-family:sans-serif;color:white">This is a password reset request for ${doc[0].username} and is valid for 30 minutes only<h3><br><br><a href=${url}><button style="display:block;padding:20px 30px;background-color:white;color:#090979;font-size:16px;font-weight:bold;border:none;border-radius:10px;margin:0px 20px;">Click Here</button></a></div>`,
 				};
 				transporter.sendMail(mailOptions, (err) => {
 					if (err) {
@@ -293,14 +293,18 @@ authRouter.post("/reset_password", async (req, res, next) => {
 		} else {
 			const id = result["sub"];
 			const encryptedPassword = await bcrypt.hash(req.body.newPassword, 10);
-			console.log("User ID", id);
-			userModel.findByIdAndUpdate(id, { password: encryptedPassword }, { new: true }, (err) => {
-				if (err) {
-					res.sendStatus(404);
-				} else {
-					res.status(200).send({ message: "changed successfully" });
-				}
-			});
+			userModel.findByIdAndUpdate(
+				id,
+				{ password: encryptedPassword, refreshTokens: [] },
+				{ new: true },
+				(err) => {
+					if (err) {
+						res.sendStatus(404);
+					} else {
+						res.status(200).send({ message: "changed successfully" });
+					}
+				},
+			);
 		}
 	});
 });

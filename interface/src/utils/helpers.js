@@ -198,7 +198,7 @@ export const loginUser = (email, password) => {
 			return jsonResponse;
 		} else if (response.status === 404) {
 			return { message: "not found" };
-		} else if (response.status === 403) {
+		} else if (response.status === 401) {
 			return { message: "wrong password" };
 		}
 	});
@@ -240,6 +240,43 @@ export const verifyUser = (access) => {
 			return { ...jsonResponse, message: "Verified" };
 		} else if (response.status === 404) {
 			return { message: "Verified Already" };
+		}
+	});
+};
+
+export const forgotPassword = (email) => {
+	const fetchOptions = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ email: email }),
+	};
+	return fetch(`${baseUrl}/auth/forgot_password`, fetchOptions).then(async (response) => {
+		if (response.ok) {
+			const jsonResponse = response.json();
+			return jsonResponse;
+		} else if (response.status === 404) {
+			return { message: "not found" };
+		}
+	});
+};
+
+export const resetPassword = (newPassword, accessToken) => {
+	const fetchOptions = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			authorization: `Bearer ${accessToken}`,
+		},
+		body: JSON.stringify({ newPassword: newPassword }),
+	};
+	return fetch(`${baseUrl}/auth/reset_password`, fetchOptions).then((response) => {
+		if (response.ok) {
+			const jsonResponse = response.json();
+			return jsonResponse;
+		} else {
+			return { message: "restricted" };
 		}
 	});
 };

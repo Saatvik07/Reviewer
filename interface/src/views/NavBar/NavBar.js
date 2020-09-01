@@ -40,12 +40,23 @@ function NavBar() {
 						</Link>
 						<Link to='/'>
 							<button className='nav-btn' onClick={logOut} id='log'>
-								Log Out
+								Sign Out
 							</button>
 						</Link>{" "}
 					</>
 				) : (
 					<>
+						<Link to='/'>
+							<button
+								className='nav-btn'
+								onClick={(event) => {
+									setNav(event.target.id);
+								}}
+								id='About'
+							>
+								About
+							</button>
+						</Link>
 						<Link to='/signup'>
 							<button
 								className='nav-btn'
@@ -54,13 +65,13 @@ function NavBar() {
 								}}
 								id='Signup'
 							>
-								Signup
+								Sign up
 							</button>
 						</Link>
 						<Link to='/login'>
 							{access ? (
 								<button className='nav-btn' onClick={logOut} id='log'>
-									Log Out
+									Sign out
 								</button>
 							) : (
 								<button
@@ -70,7 +81,7 @@ function NavBar() {
 									}}
 									id='log'
 								>
-									Log In
+									Sign in
 								</button>
 							)}
 						</Link>

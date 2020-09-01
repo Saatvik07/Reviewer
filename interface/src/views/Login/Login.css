@@ -12,37 +12,39 @@
 #customBtn:hover {
 	cursor: pointer;
 }
-span.label {
-	font-family: serif;
-	font-weight: normal;
-}
-span.icon {
-	background: url("/identity/sign-in/g-normal.png") transparent 5px 50% no-repeat;
-	display: inline-block;
-	vertical-align: middle;
-	width: 42px;
-	height: 42px;
-}
 span.buttonText {
 	display: inline-block;
 	vertical-align: middle;
-	padding-left: 42px;
-	padding-right: 42px;
-	font-size: 14px;
+	padding-left: 30px;
+	padding-right: 30px;
+	font-size: 18px;
 	font-weight: bold;
 	/* Use the Roboto font that is loaded in the <head> */
 	font-family: "Roboto", sans-serif;
 }
-.login-container {
+.login-container-left {
 	width: 40%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	background-color: #151515;
-	margin: 50px auto;
+	margin: 100px 50px;
 	color: #ff5714;
 	padding: 20px;
+}
+.login-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #ff5714;
+}
+.login-container-right {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0 50px;
 }
 .login-form {
 	width: 80%;
