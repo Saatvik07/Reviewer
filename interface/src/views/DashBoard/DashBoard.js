@@ -74,26 +74,34 @@ const DashBoard = () => {
 				arr.push(idea);
 				showIdeaModal = 1;
 				setIdeas(arr);
-				setShowModal(
-					<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
-						<ShoelaceAlert type='success' className='savedIdea-successful' open>
-							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
-							<strong>Saved !!!</strong>
-							<ShoelaceIconButton
-								name='x-circle-fill'
-								className='modal-closeBtn'
-								size='large'
-								style={{ marginLeft: "60%" }}
-								onClick={() => {
-									setShowModal(null);
-								}}
-							></ShoelaceIconButton>
-							<br />
+				if (ideas.length > 0) {
+					setShowModal(
+						<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
+							<ShoelaceAlert type='success' className='savedIdea-successful' open>
+								<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
+								<strong>Saved !!!</strong>
+								<ShoelaceIconButton
+									name='x-circle-fill'
+									className='modal-closeBtn'
+									size='large'
+									style={{ marginLeft: "60%" }}
+									onClick={() => {
+										setShowModal(null);
+									}}
+								></ShoelaceIconButton>
+								<br />
+								The idea {ideaTitle} has been saved
+								<br />
+							</ShoelaceAlert>
+						</ShoelaceAnimation>,
+					);
+				} else {
+					setShowModal(
+						<ShoelaceDialog open label={`Saved!!!!`} className='saveProject-dialog'>
 							The idea {ideaTitle} has been saved
-							<br />
-						</ShoelaceAlert>
-					</ShoelaceAnimation>,
-				);
+						</ShoelaceDialog>,
+					);
+				}
 				setIdeaTitle("");
 				setIdeaBody("");
 			});
