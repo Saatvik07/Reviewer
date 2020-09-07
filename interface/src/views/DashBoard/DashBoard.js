@@ -10,6 +10,7 @@ import {
 	ShoelaceAlert,
 	ShoelaceIcon,
 	ShoelaceIconButton,
+	ShoelaceSpinner,
 } from "../../utils/ShoelaceComponents";
 let showIdeaModal = 0,
 	showProjectModal = 0;
@@ -132,9 +133,13 @@ const DashBoard = () => {
 		}
 	}
 	async function onSaveProjectClick() {
+		setShowModal(
+			<ShoelaceDialog open label={"Saving"} className='saveProject-dialog'>
+				<ShoelaceSpinner className='save-spinner'></ShoelaceSpinner>
+			</ShoelaceDialog>,
+		);
 		const screenshotUrl = await setFormDataForScreenshot();
 		const logoUrl = await setFormDataForLogo();
-		console.log([screenshotUrl, logoUrl]);
 		const project = {
 			name: name,
 			openOptimizations: 0,

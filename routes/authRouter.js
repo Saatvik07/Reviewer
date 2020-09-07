@@ -347,7 +347,7 @@ authRouter.post("/login", async (req, res, next) => {
 				const refresh_token_array = doc[0].refreshTokens;
 				bcrypt.compare(req.body.password, userPassword, (err, result) => {
 					if (err) {
-						res.sendStatus(403);
+						res.sendStatus(401);
 					} else if (result) {
 						const refresh_token = jwt.sign({ sub: userId }, process.env.REFRESH_TOKEN_SECRET);
 						refresh_token_array.push(refresh_token);

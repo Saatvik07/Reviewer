@@ -196,6 +196,18 @@ input[type="file"] {
 .modal-closeBtn::part(base):hover {
 	color: orange;
 }
+.saveProject-dialog::part(body),
+.saveProject-dialog::part(panel) {
+	background-color: #151515;
+	color: #ff5714;
+}
+.saveProject-dialog::part(close-button) {
+	color: #ff5714 !important;
+}
+.save-spinner {
+	font-size: 2rem;
+	--indicator-color: #ff5714;
+}
 @media only screen and (max-width: 1020px) {
 	.addProject-container {
 		width: 90%;

@@ -20,9 +20,9 @@ const Projects = () => {
 				<div className='essential-div'>
 					<img
 						src={`${project.logoUrl}`}
-						width='20%'
+						width='30%'
 						height='auto'
-						style={{ backgroundColor: "#232324", margin: "10px" }}
+						style={{ backgroundColor: "#232324", margin: "10px", padding: "10px" }}
 					/>
 					<div className='info-div'>
 						<h4>

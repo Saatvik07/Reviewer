@@ -1,25 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./About.css";
 import { ShoelaceTabPanel, ShoelaceTab, ShoelaceTabGroup } from "../../utils/ShoelaceComponents";
+import Shoelace from "./shoelace.png";
+import Express from "./express.png";
+import ReactLogo from "./react.png";
+import Node from "./node.png";
+import Mongo from "./mongo.png";
 function About() {
 	const [height, setHeight] = useState(350);
-	const [width, setWidth] = useState(700);
+	const [width, setWidth] = useState(600);
+	const [logo, setLogo] = useState(50);
+	useEffect(() => {
+		if (window.innerWidth < 721) {
+			setHeight(150);
+			setWidth(300);
+			setLogo(25);
+		} else if (window.innerWidth >= 721 && window.innerWidth <= 1020) {
+			setHeight(250);
+			setWidth(500);
+			setLogo(35);
+		}
+	}, []);
+	function screenResize(mm) {
+		if (mm.matches) {
+			setHeight(150);
+			setWidth(300);
+			setLogo(25);
+		}
+	}
+	function screenResize1(mm) {
+		if (mm.matches) {
+			setHeight(250);
+			setWidth(500);
+			setLogo(35);
+		}
+	}
 	let widthMatch = window.matchMedia("(max-width: 1020px)");
-	widthMatch.addEventListener("change", function (mm) {
-		if (mm.matches) {
-			if (window.matchMedia("(min-width: 721px)")) {
-				setHeight(250);
-				setWidth(500);
-			}
-		}
-	});
+	widthMatch.addListener(screenResize);
 	let widthMatch1 = window.matchMedia("(max-width: 720px)");
-	widthMatch1.addEventListener("change", function (mm) {
-		if (mm.matches) {
-			setHeight(125);
-			setWidth(250);
-		}
-	});
+	widthMatch1.addListener(screenResize1);
 	return (
 		<div className='about-container'>
 			<svg
@@ -286,8 +305,34 @@ function About() {
 					<ShoelaceTab slot='nav' panel='Tech-Stack' className='tab'>
 						Tech Stack
 					</ShoelaceTab>
-					<ShoelaceTabPanel name='about'>Info about the app</ShoelaceTabPanel>
-					<ShoelaceTabPanel name='Tech-Stack'>MERN</ShoelaceTabPanel>
+					<ShoelaceTabPanel name='about' class='tab-panel'>
+						Reviewer is an easy to use web app which saves you from the hassle of remembering all
+						the suggestions and optimizations that come into your mind at the oddest of time.
+						<br />
+						Just add your project once and then keep on adding extended ideas and optimizations on
+						the go, open and close them as and when they are ready to be deployed.about-container
+					</ShoelaceTabPanel>
+					<ShoelaceTabPanel name='Tech-Stack' class='tab-panel'>
+						<div className='logo-bar'>
+							<img src={ReactLogo} style={{ width: `${logo}px`, height: "auto", margin: "10px" }} />
+							<img
+								src={Express}
+								style={{
+									width: `${logo}px`,
+									height: "auto",
+									margin: "10px",
+								}}
+							/>
+							<img src={Mongo} style={{ width: `${logo}px`, height: "auto", margin: "10px" }} />
+							<img src={Node} style={{ width: `${logo}px`, height: "auto", margin: "10px" }} />
+							<img src={Shoelace} style={{ width: `${logo}px`, height: "auto", margin: "10px" }} />
+						</div>
+						<ol>
+							<li>React for front-end</li>
+							<li>Express , MongoDB and NodeJS for back-end</li>
+							<li>Shoelace for Web Components</li>
+						</ol>
+					</ShoelaceTabPanel>
 				</ShoelaceTabGroup>
 			</div>
 		</div>
