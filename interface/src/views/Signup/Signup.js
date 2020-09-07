@@ -53,54 +53,59 @@ const Signup = () => {
 	}
 	return (
 		<div className='signup-container'>
-			<div className='signup-left-div'>
-				<h2>SignUp</h2>
-				<ShoelaceForm
-					className='signup-form'
-					onSlSubmit={(event) => {
-						onClickSignUp(event.detail.formData);
-					}}
-				>
-					<ShoelaceInput label='Username' name='username' className='inputs' required={true} />
-					<ShoelaceInput
-						label='Email'
-						name='email'
-						className='inputs'
-						type='email'
-						required={true}
-					/>
-					<ShoelaceInput
-						label='Password'
-						name='password'
-						className='inputs'
-						type='password'
-						togglePassword={true}
-						required={true}
-					/>
+			<ShoelaceAnimation name='slide-in-blurred-bottom' duration={1500} iterations={1}>
+				<div className='signup-left-div'>
+					<h2>SignUp</h2>
+					<ShoelaceForm
+						className='signup-form'
+						onSlSubmit={(event) => {
+							onClickSignUp(event.detail.formData);
+						}}
+					>
+						<ShoelaceInput label='Username' name='username' className='inputs' required={true} />
+						<ShoelaceInput
+							label='Email'
+							name='email'
+							className='inputs'
+							type='email'
+							required={true}
+						/>
+						<ShoelaceInput
+							label='Password'
+							name='password'
+							className='inputs'
+							type='password'
+							togglePassword={true}
+							required={true}
+						/>
 
-					<ShoelaceButton className='signup-btn' size='large' pill submit>
-						<ShoelaceIcon slot='prefix' name='check-circle'></ShoelaceIcon>
-						Submit
-					</ShoelaceButton>
-				</ShoelaceForm>
-			</div>
-
-			<div style={{ marginLeft: "50px" }}>
-				<h3>OR</h3>
-			</div>
-			<div className='signup-right-div'>
-				<h4>Sign In using:</h4>
-				<div id='customBtn' onClick={clickGoogle}>
-					<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
-					<span class='buttonText'>Google</span>
+						<ShoelaceButton className='signup-btn' size='large' pill submit>
+							<ShoelaceIcon slot='prefix' name='check-circle'></ShoelaceIcon>
+							Submit
+						</ShoelaceButton>
+					</ShoelaceForm>
 				</div>
-				<br />
-				<br />
-				<h4>
-					Already have an account ? <a href='http://localhost:3000/login'>Sign-in</a>
-				</h4>
-				{type}
-			</div>
+				<ShoelaceAnimation name='slide-in-blurred-bottom' duration={1500} iterations={1}>
+					<div style={{ marginLeft: "50px" }}>
+						<h3>OR</h3>
+					</div>
+				</ShoelaceAnimation>
+			</ShoelaceAnimation>
+			<ShoelaceAnimation name='slide-in-blurred-bottom' duration={1500} iterations={1}>
+				<div className='signup-right-div'>
+					<h4>Sign In using:</h4>
+					<div id='customBtn' onClick={clickGoogle}>
+						<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
+						<span class='buttonText'>Google</span>
+					</div>
+					<br />
+					<br />
+					<h4>
+						Already have an account ? <a href='http://localhost:3000/login'>Sign-in</a>
+					</h4>
+					{type}
+				</div>
+			</ShoelaceAnimation>
 		</div>
 	);
 };

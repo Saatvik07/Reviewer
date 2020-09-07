@@ -61,6 +61,7 @@ const DashBoard = () => {
 					setIdeas(JSON.parse(JSON.stringify(response)));
 				}
 			});
+		} else {
 		}
 	}, [access]);
 	function onSaveIdeaClick() {
@@ -210,9 +211,6 @@ const DashBoard = () => {
 			});
 		});
 	}
-	function handleCloseModal() {
-		setShowModal(null);
-	}
 	function setFormDataForScreenshot() {
 		const data = new FormData();
 		data.append("file", screenshot);
@@ -275,264 +273,215 @@ const DashBoard = () => {
 	});
 	return (
 		<div className='dashboard-container'>
-			<div className='addProject-container'>
-				<h3 className='addIdea-heading'>Add Project</h3>
-				<div className='text-inputs'>
-					<div className='addProject-input-headings'>
-						<h4 className='addProject-headings'>Name</h4>
-						<input
-							className='addProject-input'
-							placeholder='Name of the project'
-							id='name'
-							value={name}
-							onChange={(event) => {
-								setName(event.target.value);
-							}}
-						/>
-					</div>
-					<div className='addProject-input-headings'>
-						<h4 className='addProject-headings'>Start Date</h4>
-						<input
-							className='addProject-input'
-							id='startDate'
-							value={startDate}
-							onChange={(event) => {
-								setStartDate(event.target.value);
-							}}
-							type='date'
-							style={{ color: "#ff5714" }}
-						/>
-					</div>
-					<div className='addProject-input-headings'>
-						<h4 className='addProject-headings'>End Date</h4>
-						<input
-							className='addProject-input'
-							id='endDate'
-							value={endDate}
-							onChange={(event) => {
-								setEndDate(event.target.value);
-							}}
-							type='date'
-							style={{ color: "#ff5714" }}
-						/>
-					</div>
-					<div className='addProject-input-headings'>
-						<h4 className='addProject-headings'>Deployed on Link</h4>
-						<input
-							className='addProject-input'
-							placeholder='Link to the project'
-							id='link'
-							value={link}
-							onChange={(event) => {
-								setLink(event.target.value);
-							}}
-							type='url'
-						/>
-					</div>
-					<div className='addProject-input-headings'>
-						<h4 className='addProject-headings'>Github Repository</h4>
-						<input
-							className='addProject-input'
-							placeholder='Github Repository Name'
-							id='github'
-							value={github}
-							onChange={(event) => {
-								setGithub(event.target.value);
-							}}
-						/>
-					</div>
-					<div className='uploader-div'>
-						<div className='addProject-input-headings' id='screenshot-div'>
-							<h4 className='addProject-headings'>Screenshot</h4>
-							<input
-								className='addProject-input'
-								type='file'
-								onChange={(event) => {
-									var reader = new FileReader();
-									reader.onload = function (event) {
-										let screenshot;
-										if (document.querySelector(".screenshot")) {
-											document.querySelector(".screenshot").src = event.target.result;
-											setTimeout(() => {
-												document.querySelector(".screenshot").setAttribute("style", "");
-											}, 10);
-											document.querySelector(".screenshot").setAttribute("style", "animation:none");
-										} else {
-											screenshot = document.createElement("img");
-											screenshot.src = event.target.result;
-											screenshot.className = "screenshot";
-											document.getElementById("screenshot-div").appendChild(screenshot);
-										}
-									};
-									reader.readAsDataURL(event.target.files[0]);
-									setScreenshot(event.target.files[0]);
-								}}
-							/>
+			{access ? (
+				<>
+					<div className='addProject-container'>
+						<h3 className='addIdea-heading'>Add Project</h3>
+						<div className='text-inputs'>
+							<div className='addProject-input-headings'>
+								<h4 className='addProject-headings'>Name</h4>
+								<input
+									className='addProject-input'
+									placeholder='Name of the project'
+									id='name'
+									value={name}
+									onChange={(event) => {
+										setName(event.target.value);
+									}}
+								/>
+							</div>
+							<div className='addProject-input-headings'>
+								<h4 className='addProject-headings'>Start Date</h4>
+								<input
+									className='addProject-input'
+									id='startDate'
+									value={startDate}
+									onChange={(event) => {
+										setStartDate(event.target.value);
+									}}
+									type='date'
+									style={{ color: "#ff5714" }}
+								/>
+							</div>
+							<div className='addProject-input-headings'>
+								<h4 className='addProject-headings'>End Date</h4>
+								<input
+									className='addProject-input'
+									id='endDate'
+									value={endDate}
+									onChange={(event) => {
+										setEndDate(event.target.value);
+									}}
+									type='date'
+									style={{ color: "#ff5714" }}
+								/>
+							</div>
+							<div className='addProject-input-headings'>
+								<h4 className='addProject-headings'>Deployed on Link</h4>
+								<input
+									className='addProject-input'
+									placeholder='Link to the project'
+									id='link'
+									value={link}
+									onChange={(event) => {
+										setLink(event.target.value);
+									}}
+									type='url'
+								/>
+							</div>
+							<div className='addProject-input-headings'>
+								<h4 className='addProject-headings'>Github Repository</h4>
+								<input
+									className='addProject-input'
+									placeholder='Github Repository Name'
+									id='github'
+									value={github}
+									onChange={(event) => {
+										setGithub(event.target.value);
+									}}
+								/>
+							</div>
+							<div className='uploader-div'>
+								<div className='addProject-input-headings' id='screenshot-div'>
+									<h4 className='addProject-headings'>Screenshot</h4>
+									<input
+										className='addProject-input'
+										type='file'
+										onChange={(event) => {
+											var reader = new FileReader();
+											reader.onload = function (event) {
+												let screenshot;
+												if (document.querySelector(".screenshot")) {
+													document.querySelector(".screenshot").src = event.target.result;
+													setTimeout(() => {
+														document.querySelector(".screenshot").setAttribute("style", "");
+													}, 10);
+													document
+														.querySelector(".screenshot")
+														.setAttribute("style", "animation:none");
+												} else {
+													screenshot = document.createElement("img");
+													screenshot.src = event.target.result;
+													screenshot.className = "screenshot";
+													document.getElementById("screenshot-div").appendChild(screenshot);
+												}
+											};
+											reader.readAsDataURL(event.target.files[0]);
+											setScreenshot(event.target.files[0]);
+										}}
+									/>
+								</div>
+								<div className='addProject-input-headings' id='logo-div'>
+									<h4 className='addProject-headings'>Logo</h4>
+									<input
+										className='addProject-input'
+										type='file'
+										onChange={(event) => {
+											const reader = new FileReader();
+											reader.onload = function (event) {
+												let logo;
+												if (document.querySelector(".logo")) {
+													document.querySelector(".logo").src = event.target.result;
+													setTimeout(() => {
+														document.querySelector(".logo").setAttribute("style", "");
+													}, 10);
+													document.querySelector(".logo").setAttribute("style", "animation:none");
+												} else {
+													logo = document.createElement("img");
+													logo.src = event.target.result;
+													logo.className = "logo";
+													document.getElementById("logo-div").appendChild(logo);
+												}
+											};
+											reader.readAsDataURL(event.target.files[0]);
+											setLogo(event.target.files[0]);
+										}}
+									/>
+								</div>
+							</div>
 						</div>
-						<div className='addProject-input-headings' id='logo-div'>
-							<h4 className='addProject-headings'>Logo</h4>
-							<input
-								className='addProject-input'
-								type='file'
-								onChange={(event) => {
-									const reader = new FileReader();
-									reader.onload = function (event) {
-										let logo;
-										if (document.querySelector(".logo")) {
-											document.querySelector(".logo").src = event.target.result;
-											setTimeout(() => {
-												document.querySelector(".logo").setAttribute("style", "");
-											}, 10);
-											document.querySelector(".logo").setAttribute("style", "animation:none");
-										} else {
-											logo = document.createElement("img");
-											logo.src = event.target.result;
-											logo.className = "logo";
-											document.getElementById("logo-div").appendChild(logo);
-										}
-									};
-									reader.readAsDataURL(event.target.files[0]);
-									setLogo(event.target.files[0]);
-								}}
-							/>
+						<button className='addIdea-btn' onClick={onSaveProjectClick}>
+							Save Project
+						</button>
+					</div>
+					<div className='addIdea-container'>
+						<h3 className='addIdea-heading'>Add Idea</h3>
+						<h4 className='addProject-headings'>Title</h4>
+						<input
+							className='addIdea-input'
+							placeholder='What ?'
+							id='ideaTitle'
+							value={ideaTitle}
+							onChange={(event) => {
+								console.log("run");
+								setIdeaTitle(event.target.value);
+							}}
+						/>
+						<h4 className='addProject-headings'>Body</h4>
+						<textarea
+							className='addIdea-input'
+							placeholder='How ?'
+							id='ideaBody'
+							value={ideaBody}
+							onChange={(event) => {
+								setIdeaBody(event.target.value);
+							}}
+							maxLength={300}
+						/>
+						<button className='addIdea-btn' onClick={onSaveIdeaClick}>
+							Save Idea
+						</button>
+						{showModal}
+					</div>
+					<div className='showIdea-container'>
+						<h2 style={{ color: "#ffba08", textAlign: "center", marginTop: "50px" }}>
+							Potential Projects
+						</h2>
+						<div className='ideasDisplay'>
+							{ideasArray.length ? ideasArray : <h1>Wow soo empty</h1>}
 						</div>
 					</div>
+				</>
+			) : (
+				<div style={{ color: "red" }}>
+					<svg
+						id='color'
+						enable-background='new 0 0 24 24'
+						height='200'
+						viewBox='0 0 24 24'
+						width='200'
+						xmlns='http://www.w3.org/2000/svg'
+						style={{ margin: "50px" }}
+					>
+						<path
+							d='m12 8.75c-.553 0-1-.447-1-1v-2.75c0-1.654-1.346-3-3-3s-3 1.346-3 3v2.75c0 .553-.447 1-1 1s-1-.447-1-1v-2.75c0-2.757 2.243-5 5-5s5 2.243 5 5v2.75c0 .553-.447 1-1 1z'
+							fill='#90a4ae'
+						/>
+						<path
+							d='m13.75 20h-11.5c-1.24 0-2.25-1.01-2.25-2.25v-8.5c0-1.24 1.01-2.25 2.25-2.25h11.5c1.24 0 2.25 1.01 2.25 2.25v8.5c0 1.24-1.01 2.25-2.25 2.25z'
+							fill='#ffc107'
+						/>
+						<path d='m8 0c-2.757 0-5 2.243-5 5v2h2v-2c0-1.654 1.346-3 3-3z' fill='#7d8f97' />
+						<path
+							d='m8 7h-3-2-.75c-1.24 0-2.25 1.01-2.25 2.25v8.5c0 1.24 1.01 2.25 2.25 2.25h5.75z'
+							fill='#dea806'
+						/>
+						<path d='m20 19c-1.103 0-2-.896-2-2s.897-2 2-2 2 .896 2 2-.897 2-2 2z' fill='#2196f3' />
+						<path
+							d='m23.25 24h-6.5c-.414 0-.75-.336-.75-.75v-.5c0-1.517 1.233-2.75 2.75-2.75h2.5c1.517 0 2.75 1.233 2.75 2.75v.5c0 .414-.336.75-.75.75z'
+							fill='#2196f3'
+						/>
+						<g fill='#1d83d4'>
+							<path d='m20 15c-1.103 0-2 .896-2 2s.897 2 2 2z' />
+							<path d='m20 20h-1.25c-1.517 0-2.75 1.233-2.75 2.75v.5c0 .414.336.75.75.75h3.25z' />
+						</g>
+					</svg>
+					<h5>Sign in/Sign up to continue</h5>
 				</div>
-				<button className='addIdea-btn' onClick={onSaveProjectClick}>
-					Save Project
-				</button>
-			</div>
-			<div className='addIdea-container'>
-				<h3 className='addIdea-heading'>Add Idea</h3>
-				<h4 className='addProject-headings'>Title</h4>
-				<input
-					className='addIdea-input'
-					placeholder='What ?'
-					id='ideaTitle'
-					value={ideaTitle}
-					onChange={(event) => {
-						console.log("run");
-						setIdeaTitle(event.target.value);
-					}}
-				/>
-				<h4 className='addProject-headings'>Body</h4>
-				<textarea
-					className='addIdea-input'
-					placeholder='How ?'
-					id='ideaBody'
-					value={ideaBody}
-					onChange={(event) => {
-						setIdeaBody(event.target.value);
-					}}
-					maxLength={300}
-				/>
-				<button className='addIdea-btn' onClick={onSaveIdeaClick}>
-					Save Idea
-				</button>
-				{showModal}
-			</div>
-			<div className='showIdea-container'>
-				<h2 style={{ color: "#ffba08", textAlign: "center", marginTop: "50px" }}>
-					Potential Projects
-				</h2>
-				<div className='ideasDisplay'>
-					{ideasArray.length ? ideasArray : <h1>Wow soo empty</h1>}
-				</div>
-			</div>
+			)}
 		</div>
 	);
 };
 export default withRouter(DashBoard);
-/* 
-<div className='special-inputs'>
-            <div className='optimize-container'>
-              <div className='add-entry'>
-                <h1>Optimizations</h1>
-                <input className='addProject-input' placeholder='Component Affected' />
-                <input className='addProject-input' placeholder='A way to optimize it' />
-              </div>
-            </div>
-            <div className='extend-container'>
-              <div className='add-entry'>
-                <h1>Extended Idea</h1>
-                <input className='addProject-input' placeholder='What ?' />
-                <input className='addProject-input' placeholder='How ?' />
-              </div>
-            </div>
-          </div>*/
-// function onChangeUpdatedIdea(event) {
-// 	console.log(event.target);
-// 	if (event.target.id === "updateBody") {
-// 		setUpdateBody(event.target.value);
-// 	} else if (event.target.id === "updateTitle") {
-// 		setUpdateTitle(event.target.value);
-// 	}
-// }
-// function onClickUpdate(event) {
-// 	const ideaDiv = document.getElementById(`d${event.target.id}`);
-// 	const title = document.getElementById(`h${event.target.id}`).innerText;
-// 	const body = document.getElementById(`p${event.target.id}`).innerText;
-// 	const updateButtonId = event.target.id;
-// 	setUpdateBody(body);
-// 	setUpdateId(updateButtonId);
-// 	setUpdateTitle(title);
-// 	ideaDiv.innerHTML = "";
-// 	const updateTitleElement = document.createElement("input");
-// 	updateTitleElement.value = updateTitle;
-// 	updateTitleElement.id = "updateTitle";
-// 	updateTitleElement.className = "addIdea-input";
-// 	updateTitleElement.onchange = (event) => {
-// 		setUpdateTitle(event.target.value);
-// 	};
-// 	const updateBodyElement = document.createElement("textarea");
-// 	updateBodyElement.id = "updateBody";
-// 	updateBodyElement.value = updateBody;
-// 	updateBodyElement.className = "addIdea-input";
-// 	updateBodyElement.onchange = onChangeUpdatedIdea;
-// 	const updateButtonElement = document.createElement("button");
-// 	updateButtonElement.id = updateButtonId;
-// 	updateButtonElement.onclick = () => {
-// 		console.log(updateTitle);
-// 	};
-// 	updateButtonElement.innerHTML = "Save";
-// 	ideaDiv.appendChild(updateTitleElement);
-// 	ideaDiv.appendChild(updateBodyElement);
-// 	ideaDiv.appendChild(updateButtonElement);
-// }
-// function onUpdate() {
-// 	console.log(updateTitle, "title");
-// 	const updatedIdea = {
-// 		title: updateTitle,
-// 		body: updateBody,
-// 		_id: updateId,
-// 	};
 
-// 	updateIdea(updatedIdea, access).then((response) => {
-// 		const ideaDiv = document.getElementById(`d${response._id}`);
-// 		ideaDiv.innerHTML = "";
-// 		const titleElement = document.createElement("h5");
-// 		titleElement.id = `h${response._id}`;
-// 		titleElement.innerText = `${response.title}`;
-// 		const bodyElement = document.createElement("p");
-// 		bodyElement.id = `p${response._id}`;
-// 		bodyElement.innerText = `${response.body}`;
-// 		bodyElement.className = "idea-body";
-// 		const button = document.createElement("button");
-// 		button.id = `${response._id}`;
-// 		button.innerText = "Update";
-// 		button.onclick = onClickUpdate;
-// 		button.className = "update-btn";
-// 		const delButton = document.createElement("button");
-// 		delButton.id = `b2${response._id}`;
-// 		delButton.innerText = "Delete";
-// 		delButton.onclick = onClickDelete;
-// 		delButton.className = "delete-btn";
-// 		const btnDiv = document.createElement("div");
-// 		btnDiv.className = "btn-div";
-// 		btnDiv.appendChild(delButton);
-// 		btnDiv.appendChild(button);
-// 		ideaDiv.appendChild(titleElement);
-// 		ideaDiv.appendChild(bodyElement);
-// 		ideaDiv.appendChild(btnDiv);
-// 	});
-// }
+//Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>

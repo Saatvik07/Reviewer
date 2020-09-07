@@ -13,9 +13,19 @@
 	background-color: #151515;
 
 	margin: 15px;
-	border: none;
+
 	font-size: 20px;
 	color: #ff5714;
+}
+.nav-btn button,
+.nav-btn button :active {
+	background-color: #151515;
+	color: #ff5714;
+	border: none !important;
+	margin: 0px 5px;
+}
+.nav-icon::part(base) {
+	color: #777;
 }
 @media only screen and (max-width: 720px) {
 	.nav-btn {

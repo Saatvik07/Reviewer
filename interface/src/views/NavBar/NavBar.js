@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { userContext } from "../App/App";
 import "./NavBar.css";
 import { logoutUser } from "../../utils/helpers";
+import { ShoelaceButton, ShoelaceIcon } from "../../utils/ShoelaceComponents";
 function NavBar() {
 	const [nav, setNav] = useState("log");
 	const { access, setAccess } = useContext(userContext);
@@ -46,45 +47,56 @@ function NavBar() {
 					</>
 				) : (
 					<>
-						<Link to='/'>
-							<button
-								className='nav-btn'
-								onClick={(event) => {
-									setNav(event.target.id);
-								}}
-								id='About'
-							>
-								About
-							</button>
-						</Link>
-						<Link to='/signup'>
-							<button
-								className='nav-btn'
-								onClick={(event) => {
-									setNav(event.target.id);
-								}}
-								id='Signup'
-							>
-								Sign up
-							</button>
-						</Link>
-						<Link to='/login'>
-							{access ? (
-								<button className='nav-btn' onClick={logOut} id='log'>
-									Sign out
-								</button>
-							) : (
+						<div className='nav-btn'>
+							<Link to='/'>
+								<ShoelaceIcon name='info-circle' className='nav-icon'></ShoelaceIcon>
 								<button
-									className='nav-btn'
 									onClick={(event) => {
 										setNav(event.target.id);
 									}}
-									id='log'
+									id='About'
 								>
-									Sign in
+									About
 								</button>
-							)}
-						</Link>
+							</Link>
+						</div>
+						<div className='nav-btn'>
+							<Link to='/signup'>
+								<ShoelaceIcon name='person-plus' className='nav-icon'></ShoelaceIcon>
+								<button
+									onClick={(event) => {
+										setNav(event.target.id);
+									}}
+									id='Signup'
+								>
+									Sign up
+								</button>
+							</Link>
+						</div>
+						<div className='nav-btn'>
+							<Link to='/login'>
+								{access ? (
+									<>
+										<ShoelaceIcon name='box-arrow-left' className='nav-icon'></ShoelaceIcon>
+										<button onClick={logOut} id='log'>
+											Sign out
+										</button>
+									</>
+								) : (
+									<>
+										<ShoelaceIcon name='arrow-right-circle' className='nav-icon'></ShoelaceIcon>
+										<button
+											onClick={(event) => {
+												setNav(event.target.id);
+											}}
+											id='log'
+										>
+											Sign in
+										</button>
+									</>
+								)}
+							</Link>
+						</div>
 					</>
 				)}
 			</div>
