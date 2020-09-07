@@ -1,11 +1,11 @@
 .App,
 .content {
-	min-height: 110vh;
+	min-height: 100vh;
 	min-width: 100vw;
 	background-color: #232323;
 }
 body {
-	min-height: 110vh;
+	min-height: 100vh;
 	background-color: #232323;
 	box-sizing: border-box;
 }

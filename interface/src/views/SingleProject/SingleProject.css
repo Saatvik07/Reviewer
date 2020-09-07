@@ -66,7 +66,7 @@ textarea.addExtenIdea-input {
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
-	align-items: center;
+	align-items: flex-start;
 }
 .addOptimize-input-div,
 .addExten-input-div {
@@ -80,8 +80,8 @@ textarea.addExtenIdea-input {
 .showExtenIdea-div {
 	background-color: #232324;
 	width: 65%;
-	max-height: 45vh;
-	min-height: 45vh;
+	max-height: 75vh;
+	min-height: 75vh;
 	overflow-y: scroll;
 }
 .singleOptimize-div,
@@ -148,12 +148,7 @@ body > div.fade.modal-container.modal.show > div > div {
 	color: #ff5714;
 	background-color: #232324;
 }
-body
-	> div.fade.modal-container.modal.show
-	> div
-	> div
-	> div.modal-footer
-	> button {
+body > div.fade.modal-container.modal.show > div > div > div.modal-footer > button {
 	background-color: #151515;
 	color: red;
 	border: none;
@@ -163,6 +158,17 @@ body > div.fade.modal-container.modal.show > div > div > div.modal-footer {
 }
 body > div.fade.modal-container.modal.show > div > div > div.modal-header {
 	border: none;
+}
+
+.tab-content {
+	width: 100%;
+}
+.singleTabGroup a {
+	background-color: #151515 !important;
+	color: #ff5714 !important;
+}
+.singleTabGroup .nav-link.active {
+	border: 1px solid #007bff !important;
 }
 @media only screen and (max-width: 720px) {
 	.singleProject-left-div {
