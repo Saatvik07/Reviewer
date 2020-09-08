@@ -4,8 +4,10 @@ import { withRouter, useParams } from "react-router-dom";
 import { getProject, addOptiAndIdea } from "../../utils/helpers";
 import { Modal, Button, Tab, Tabs } from "react-bootstrap";
 import logo from "../Projects/logo.png";
+import extenIcon from "./optimizeIcon.png";
+import optimizeIcon from "./extenIcon.png";
 import { userContext } from "../App/App";
-import { ShoelaceTab, ShoelaceTabGroup, ShoelaceTabPanel } from "../../utils/ShoelaceComponents";
+import { ShoelaceDialog, ShoelaceButton, ShoelaceAnimation } from "../../utils/ShoelaceComponents";
 function SingleProject() {
 	const { access, setAccess } = useContext(userContext);
 	const { id } = useParams();
@@ -14,7 +16,7 @@ function SingleProject() {
 		name: "Name1",
 		link: "#",
 		githubRepo: "SomethingABC",
-		optimization: [],
+		optimization: [{ closed: 1, body: "Heyy", title: "Something1" }],
 		openOptimizations: 0,
 		closedOptimizations: 0,
 		openIdeas: 0,
@@ -29,7 +31,7 @@ function SingleProject() {
 	const [extenIdeaBody, setExtenIdeaBody] = useState("");
 	const [disp, setDisp] = useState([]);
 	const [ideaDisp, setIdeaDisp] = useState([]);
-	const [showModal, setShowModal] = useState([false, false]);
+	const [showModal, setShowModal] = useState(null);
 	// useEffect(() => {
 	// 	getProject(id, access).then((response) => {
 	// 		if (response) {
@@ -79,7 +81,6 @@ function SingleProject() {
 				};
 			});
 		} else {
-			console.log("Optimize " + id + " is opening");
 			document.getElementById(divId).className = "singleOptimize-div available";
 			newButton.className = "closeOptimize-btn";
 			let updated = project.optimization
@@ -219,152 +220,139 @@ function SingleProject() {
 			});
 		}
 	};
-	const handleModalClose = () => {
-		setShowModal([false, false]);
-	};
-	// useEffect(() => {
-	// 	addOptiAndIdea(
-	// 		{
-	// 			arr: project.optimization,
-	// 			open: project.openOptimizations,
-	// 			closed: project.closedOptimizations,
-	// 		},
-	// 		id,
-	// 		"optimization",
-	// 		access,
-	// 	);
-	// 	console.log(project);
-	// 	let optimizeArr = project.optimization
-	// 		? project.optimization.map((obj) => {
-	// 				return (
-	// 					<div
-	// 						className={
-	// 							obj.closed ? "singleOptimize-div notavailable" : "singleOptimize-div available"
-	// 						}
-	// 						key={obj.title}
-	// 						id={`Od${obj.title}`}
-	// 					>
-	// 						<div id={`Od2${obj.title}`}>
-	// 							<h5>{obj.title}</h5>
-	// 							<button
-	// 								className='deleteOptimize-btn'
-	// 								id={`Obtn2${obj.title}`}
-	// 								onClick={handleDelete}
-	// 							>
-	// 								Delete
-	// 							</button>
-	// 							{obj.closed ? (
-	// 								<button className='openOptimize-btn' id={`Obtn${obj.title}`} onClick={handleOpen}>
-	// 									Open
-	// 								</button>
-	// 							) : (
-	// 								<button
-	// 									className='closeOptimize-btn'
-	// 									id={`Obtn${obj.title}`}
-	// 									onClick={handleClose}
-	// 								>
-	// 									Close
-	// 								</button>
-	// 							)}
-	// 						</div>
+	useEffect(() => {
+		addOptiAndIdea(
+			{
+				arr: project.optimization,
+				open: project.openOptimizations,
+				closed: project.closedOptimizations,
+			},
+			id,
+			"optimization",
+			access,
+		);
+		let optimizeArr =
+			project.optimization && project.optimization.length > 0 ? (
+				project.optimization.map((obj) => {
+					return (
+						<div
+							className={
+								obj.closed ? "singleOptimize-div notavailable" : "singleOptimize-div available"
+							}
+							key={obj.title}
+							id={`Od${obj.title}`}
+						>
+							<div id={`Od2${obj.title}`}>
+								<h5>{obj.title}</h5>
+								<button
+									className='deleteOptimize-btn'
+									id={`Obtn2${obj.title}`}
+									onClick={handleDelete}
+								>
+									Delete
+								</button>
+								{obj.closed ? (
+									<button className='openOptimize-btn' id={`Obtn${obj.title}`} onClick={handleOpen}>
+										Open
+									</button>
+								) : (
+									<button
+										className='closeOptimize-btn'
+										id={`Obtn${obj.title}`}
+										onClick={handleClose}
+									>
+										Close
+									</button>
+								)}
+							</div>
 
-	// 						<p>{obj.body}</p>
-	// 					</div>
-	// 				);
-	// 		  })
-	// 		: [];
-	// 	setDisp(optimizeArr);
-	// }, [project.optimization, project.closedOptimizations, project.openOptimizations]);
-	// useEffect(() => {
-	// 	addOptiAndIdea(
-	// 		{
-	// 			arr: project.extendedIdeas,
-	// 			open: project.openIdeas,
-	// 			closed: project.closedIdeas,
-	// 		},
-	// 		id,
-	// 		"idea",
-	// 		access,
-	// 	);
-	// 	console.log(project);
-	// 	let extenIdeaArr = project.extendedIdeas
-	// 		? project.extendedIdeas.map((obj) => {
-	// 				let secondButton;
-	// 				if (obj.closed) {
-	// 					secondButton = (
-	// 						<button className='closeExtenIdea-btn' id={`Ebtn${obj.title}`} onClick={handleOpen}>
-	// 							Open
-	// 						</button>
-	// 					);
-	// 				} else {
-	// 					secondButton = (
-	// 						<button className='closeExtenIdea-btn' id={`Ebtn${obj.title}`} onClick={handleClose}>
-	// 							Close
-	// 						</button>
-	// 					);
-	// 				}
-	// 				return (
-	// 					<div
-	// 						className={
-	// 							obj.closed ? "singleExtenIdea-div notavailable" : "singleExtenIdea-div available"
-	// 						}
-	// 						key={obj.title}
-	// 						id={`Ed${obj.title}`}
-	// 					>
-	// 						<div id={`Ed2${obj.title}`}>
-	// 							<h5>{obj.title}</h5>
-	// 							<button
-	// 								className='deleteExtenIdea-btn'
-	// 								id={`Ebtn2${obj.title}`}
-	// 								onClick={handleDelete}
-	// 							>
-	// 								Delete
-	// 							</button>
-	// 							{secondButton}
-	// 						</div>
+							<p>{obj.body}</p>
+						</div>
+					);
+				})
+			) : (
+				<>
+					<h4 style={{ color: "#444", marginTop: "50px" }}>Wow so empty</h4>
+				</>
+			);
+		setDisp(optimizeArr);
+	}, [project.optimization, project.closedOptimizations, project.openOptimizations]);
+	useEffect(() => {
+		addOptiAndIdea(
+			{
+				arr: project.extendedIdeas,
+				open: project.openIdeas,
+				closed: project.closedIdeas,
+			},
+			id,
+			"idea",
+			access,
+		);
+		let extenIdeaArr =
+			project.extendedIdeas && project.extendedIdeas.length > 0 ? (
+				project.extendedIdeas.map((obj) => {
+					let secondButton;
+					if (obj.closed) {
+						secondButton = (
+							<button className='closeExtenIdea-btn' id={`Ebtn${obj.title}`} onClick={handleOpen}>
+								Open
+							</button>
+						);
+					} else {
+						secondButton = (
+							<button className='closeExtenIdea-btn' id={`Ebtn${obj.title}`} onClick={handleClose}>
+								Close
+							</button>
+						);
+					}
+					return (
+						<div
+							className={
+								obj.closed ? "singleExtenIdea-div notavailable" : "singleExtenIdea-div available"
+							}
+							key={obj.title}
+							id={`Ed${obj.title}`}
+						>
+							<div id={`Ed2${obj.title}`}>
+								<h5>{obj.title}</h5>
+								<button
+									className='deleteExtenIdea-btn'
+									id={`Ebtn2${obj.title}`}
+									onClick={handleDelete}
+								>
+									Delete
+								</button>
+								{secondButton}
+							</div>
 
-	// 						<p>{obj.body}</p>
-	// 					</div>
-	// 				);
-	// 		  })
-	// 		: [];
-	// 	setIdeaDisp(extenIdeaArr);
-	// }, [project.openIdeas, project.closedIdeas, project.extendedIdeas]);
-	let modal = (
-		<Modal show={showModal[0]} onHide={handleModalClose} className='modal-container'>
-			<Modal.Header closeButton>
-				<Modal.Title>Sorry cannot add this optimization</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>An optimization with the same title exists</Modal.Body>
-			<Modal.Footer>
-				<Button onClick={handleModalClose}>Close</Button>
-			</Modal.Footer>
-		</Modal>
-	);
-	let modal1 = (
-		<Modal show={showModal[1]} onHide={handleModalClose} className='modal-container'>
-			<Modal.Header closeButton>
-				<Modal.Title>Sorry cannot add this idea</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>An extended idea with the same title exists</Modal.Body>
-			<Modal.Footer>
-				<Button onClick={handleModalClose}>Close</Button>
-			</Modal.Footer>
-		</Modal>
-	);
+							<p>{obj.body}</p>
+						</div>
+					);
+				})
+			) : (
+				<>
+					<h4 style={{ color: "#444", marginTop: "50px" }}>Wow so empty</h4>
+				</>
+			);
+		setIdeaDisp(extenIdeaArr);
+	}, [project.openIdeas, project.closedIdeas, project.extendedIdeas]);
 	const onOptimizeAdd = () => {
 		let unique = 1;
 		for (let i = 0; i < project.optimization.length; i++) {
 			if (project.optimization[i].title === optimizationTitle) {
 				unique = 0;
-				setShowModal([true, false]);
+				setShowModal(
+					<ShoelaceDialog open label={"OOPS !!!"} className='saveProject-dialog'>
+						An optimization with this title already exists
+					</ShoelaceDialog>,
+				);
 				break;
 			}
 		}
 		if (unique) {
 			const arr = project.optimization;
 
-			arr.push({ title: optimizationTitle, body: optimizationBody, closed: 0 });
+			arr.unshift({ title: optimizationTitle, body: optimizationBody, closed: 0 });
 			setProject((current) => {
 				return {
 					...current,
@@ -379,13 +367,17 @@ function SingleProject() {
 		for (let i = 0; i < project.extendedIdeas.length; i++) {
 			if (project.extendedIdeas[i].title === extenIdeaTitle) {
 				unique = 0;
-				setShowModal([false, true]);
+				setShowModal(
+					<ShoelaceDialog open label={"OOPS !!!"} className='saveProject-dialog'>
+						An idea with this title already exists
+					</ShoelaceDialog>,
+				);
 				break;
 			}
 		}
 		if (unique) {
 			const arr = project.extendedIdeas;
-			arr.push({ title: extenIdeaTitle, body: extenIdeaBody, closed: 0 });
+			arr.unshift({ title: extenIdeaTitle, body: extenIdeaBody, closed: 0 });
 			setProject((current) => {
 				return {
 					...current,
@@ -415,6 +407,8 @@ function SingleProject() {
 						<div className='addOptimize-div'>
 							<div className='addOptimize-input-div'>
 								<h2 style={{ color: "#ff5714" }}>Optimizations</h2>
+								<img src={optimizeIcon} className='singleProject-icon'></img>
+
 								<div
 									style={{
 										display: "flex",
@@ -453,6 +447,7 @@ function SingleProject() {
 						<div className='addExten-div'>
 							<div className='addExten-input-div'>
 								<h2 style={{ color: "#ff5714" }}>Extended Ideas</h2>
+								<img src={extenIcon} className='singleProject-icon'></img>
 								<div
 									style={{
 										display: "flex",
@@ -488,10 +483,7 @@ function SingleProject() {
 					</Tab>
 				</Tabs>
 			</div>
-			<div className='Modal'>
-				{modal}
-				{modal1}
-			</div>
+			{showModal}
 		</div>
 	);
 }

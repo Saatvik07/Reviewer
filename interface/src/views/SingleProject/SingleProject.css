@@ -55,7 +55,8 @@
 }
 textarea.addOptimize-input,
 textarea.addExtenIdea-input {
-	min-height: 30vh;
+	min-height: 33vh;
+	resize: none;
 	font-size: 15px;
 	margin: 20px auto;
 	width: 95%;
@@ -80,8 +81,8 @@ textarea.addExtenIdea-input {
 .showExtenIdea-div {
 	background-color: #232324;
 	width: 65%;
-	max-height: 75vh;
-	min-height: 75vh;
+	max-height: 80vh;
+	min-height: 80vh;
 	overflow-y: scroll;
 }
 .singleOptimize-div,
@@ -170,6 +171,12 @@ body > div.fade.modal-container.modal.show > div > div > div.modal-header {
 .singleTabGroup .nav-link.active {
 	border: 1px solid #007bff !important;
 }
+.singleProject-icon {
+	width: 175px;
+	height: auto;
+	margin: 20px;
+	opacity: 0.6;
+}
 @media only screen and (max-width: 720px) {
 	.singleProject-left-div {
 		height: 20vh;
@@ -205,16 +212,19 @@ body > div.fade.modal-container.modal.show > div > div > div.modal-header {
 		flex-direction: column;
 	}
 	.addExten-div {
-		flex-direction: column-reverse;
+		flex-direction: column;
 	}
 	.showOptimize-div,
 	.showExtenIdea-div {
-		width: 90%;
+		margin: 0 auto;
+		width: 80%;
 		min-height: 20vh;
+		max-height: 50vh;
 	}
 	.addOptimize-input-div,
 	.addExten-input-div {
-		width: 70%;
+		width: 80%;
+		margin: 0 auto;
 	}
 	.closeOptimize-btn,
 	.closeExtenIdea-btn {
@@ -236,5 +246,12 @@ body > div.fade.modal-container.modal.show > div > div > div.modal-header {
 	.addOptimize-input-div h2,
 	.addExten-input-div h2 {
 		font-size: 30px;
+	}
+	#root > div > div.content > div > div.singleProject-right-div > nav {
+		align-self: center;
+	}
+	.singleProject-icon {
+		width: 100px;
+		height: auto;
 	}
 }

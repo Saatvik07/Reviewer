@@ -57,7 +57,7 @@ function Login() {
 	}
 	return (
 		<div className='login-container'>
-			<ShoelaceAnimation name='slide-in-blurred-left' duration={1500} iterations={1}>
+			<ShoelaceAnimation name='fade-in' duration={1500} iterations={1}>
 				<div className='login-container-left'>
 					<h1>Sign in</h1>
 					<ShoelaceForm
@@ -92,7 +92,7 @@ function Login() {
 					{type}
 				</div>
 			</ShoelaceAnimation>
-			<ShoelaceAnimation name='slide-in-blurred-right' duration={1500} iterations={1}>
+			<ShoelaceAnimation name='fade-in' duration={1500} iterations={1}>
 				<div className='login-container-right'>
 					<h3>OR</h3>
 					<br />

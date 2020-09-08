@@ -53,7 +53,7 @@ const Signup = () => {
 	}
 	return (
 		<div className='signup-container'>
-			<ShoelaceAnimation name='slide-in-blurred-bottom' duration={1500} iterations={1}>
+			<ShoelaceAnimation name='fade-in' duration={1000} iterations={1}>
 				<div className='signup-left-div'>
 					<h2>SignUp</h2>
 					<ShoelaceForm
@@ -85,13 +85,13 @@ const Signup = () => {
 						</ShoelaceButton>
 					</ShoelaceForm>
 				</div>
-				<ShoelaceAnimation name='slide-in-blurred-bottom' duration={1500} iterations={1}>
+				<ShoelaceAnimation name='fade-in' duration={1000} iterations={1}>
 					<div style={{ marginLeft: "50px" }}>
 						<h3>OR</h3>
 					</div>
 				</ShoelaceAnimation>
 			</ShoelaceAnimation>
-			<ShoelaceAnimation name='slide-in-blurred-bottom' duration={1500} iterations={1}>
+			<ShoelaceAnimation name='fade-in' duration={1000} iterations={1}>
 				<div className='signup-right-div'>
 					<h4>Sign In using:</h4>
 					<div id='customBtn' onClick={clickGoogle}>
