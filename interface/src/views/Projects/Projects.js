@@ -7,12 +7,14 @@ const Projects = () => {
 	const [projects, setProjects] = useState([]);
 	const { access, setAccess } = useContext(userContext);
 	useEffect(() => {
-		getProjects(access).then((arr) => {
-			if (arr) {
-				setProjects(arr);
-			}
-		});
-	}, []);
+		if (access) {
+			getProjects(access).then((arr) => {
+				if (arr) {
+					setProjects(arr);
+				}
+			});
+		}
+	}, [access]);
 	const projectsArray = projects.map((project) => {
 		return (
 			<div className='project-div'>

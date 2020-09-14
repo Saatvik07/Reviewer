@@ -32,11 +32,12 @@ function App() {
 		});
 	}, []);
 	const [access, setAccess] = useState(undefined);
+	const [newUser, setNewUser] = useState(false);
 	return (
 		<Router>
 			<Switch>
 				<div className='App'>
-					<userContext.Provider value={{ access, setAccess }}>
+					<userContext.Provider value={{ access, setAccess, newUser, setNewUser }}>
 						<div className='navbar-div'>
 							<NavBar />
 						</div>

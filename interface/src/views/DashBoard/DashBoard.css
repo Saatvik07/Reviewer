@@ -208,6 +208,12 @@ input[type="file"] {
 	font-size: 2rem;
 	--indicator-color: #ff5714;
 }
+.refresh-spinner {
+	font-size: 10rem;
+	align-self: center;
+	justify-self: center;
+	--indicator-color: #ff5714;
+}
 @media only screen and (max-width: 1020px) {
 	.addProject-container {
 		width: 90%;

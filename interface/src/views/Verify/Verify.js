@@ -7,7 +7,7 @@ import Tick from "./tick.png";
 import "./Verify.css";
 function Verify() {
 	const { accessToken } = useParams();
-	const { access, setAccess } = useContext(userContext);
+	const { setAccess, setNewUser } = useContext(userContext);
 	const history = useHistory();
 	const [verifying, setVerifying] = useState(true);
 	const [verified, setVerified] = useState(<h2 className='verification-ongoing'>Verifying....</h2>);
@@ -15,6 +15,7 @@ function Verify() {
 		verifyUser(accessToken).then((result) => {
 			if (result.message === "Verified") {
 				setVerifying(null);
+				setNewUser(true);
 				setVerified(
 					<div className='verified'>
 						<img style={{ width: "100px", height: "auto" }} src={Tick} />

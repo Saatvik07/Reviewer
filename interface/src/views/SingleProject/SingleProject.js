@@ -33,12 +33,15 @@ function SingleProject() {
 	const [ideaDisp, setIdeaDisp] = useState([]);
 	const [showModal, setShowModal] = useState(null);
 	useEffect(() => {
-		getProject(id, access).then((response) => {
-			if (response) {
-				setProject(response);
-			}
-		});
-	}, []);
+		if (access) {
+			console.log(access);
+			getProject(id, access).then((response) => {
+				if (response) {
+					setProject(response);
+				}
+			});
+		}
+	}, [access]);
 	const handleOpen = (event) => {
 		const id = event.target.id.slice(4);
 		let prefix;
@@ -221,16 +224,19 @@ function SingleProject() {
 		}
 	};
 	useEffect(() => {
-		addOptiAndIdea(
-			{
-				arr: project.optimization,
-				open: project.openOptimizations,
-				closed: project.closedOptimizations,
-			},
-			id,
-			"optimization",
-			access,
-		);
+		if (access) {
+			addOptiAndIdea(
+				{
+					arr: project.optimization,
+					open: project.openOptimizations,
+					closed: project.closedOptimizations,
+				},
+				id,
+				"optimization",
+				access,
+			);
+		}
+
 		let optimizeArr =
 			project.optimization && project.optimization.length > 0 ? (
 				project.optimization.map((obj) => {
@@ -276,18 +282,21 @@ function SingleProject() {
 				</>
 			);
 		setDisp(optimizeArr);
-	}, [project.optimization, project.closedOptimizations, project.openOptimizations]);
+	}, [project.optimization, project.closedOptimizations, project.openOptimizations, access]);
 	useEffect(() => {
-		addOptiAndIdea(
-			{
-				arr: project.extendedIdeas,
-				open: project.openIdeas,
-				closed: project.closedIdeas,
-			},
-			id,
-			"idea",
-			access,
-		);
+		if (access) {
+			addOptiAndIdea(
+				{
+					arr: project.extendedIdeas,
+					open: project.openIdeas,
+					closed: project.closedIdeas,
+				},
+				id,
+				"idea",
+				access,
+			);
+		}
+
 		let extenIdeaArr =
 			project.extendedIdeas && project.extendedIdeas.length > 0 ? (
 				project.extendedIdeas.map((obj) => {
@@ -335,7 +344,7 @@ function SingleProject() {
 				</>
 			);
 		setIdeaDisp(extenIdeaArr);
-	}, [project.openIdeas, project.closedIdeas, project.extendedIdeas]);
+	}, [project.openIdeas, project.closedIdeas, project.extendedIdeas, access]);
 	const onOptimizeAdd = () => {
 		let unique = 1;
 		for (let i = 0; i < project.optimization.length; i++) {

@@ -211,7 +211,7 @@ authRouter.post("/new_google_login", async (req, res, next) => {
 							res.send(500);
 						}
 					});
-					res.status(201).send({ access_token: access_token, sessionID: sessionID });
+					res.status(201).send({ access_token: access_token, sessionID: sessionID, newUser: true });
 				}
 			});
 		}

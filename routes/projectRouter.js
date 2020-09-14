@@ -53,7 +53,7 @@ projectRouter.get("/:id", verifyRefreshToken, (req, res, next) => {
 	jwt.verify(access_token, process.env.ACCESS_TOKEN_SECRET, async (err, payload) => {
 		if (err) {
 			console.log(err);
-			res.send(403);
+			res.sendStatus(403);
 		} else {
 			const userID = payload.sub;
 			projectModel.findById(req.params.id, (err, doc) => {
