@@ -7,13 +7,15 @@ import { addProject, addIdea, getIdea, updateIdea, deleteIdea } from "../../util
 import { userContext } from "../App/App";
 import {
 	ShoelaceDialog,
-	ShoelaceButton,
 	ShoelaceAnimation,
 	ShoelaceAlert,
 	ShoelaceIcon,
 	ShoelaceIconButton,
 	ShoelaceSpinner,
 	ShoelaceDrawer,
+	ShoelaceCard,
+	ShoelaceButtonGroup,
+	ShoelaceButton,
 } from "../../utils/ShoelaceComponents";
 
 function useQuery() {
@@ -263,28 +265,28 @@ const DashBoard = () => {
 	}
 	const ideasArray = ideas.map((idea) => {
 		return (
-			<div
+			<ShoelaceCard
 				className='idea-div'
 				data-aos='slide-up'
 				data-aos-anchor='#a'
 				id={`d${idea._id}`}
 				key={`${idea._id}`}
 			>
-				<h5 id={`h${idea._id}`} className='idea-title'>
+				<h5 id={`h${idea._id}`} className='idea-title' slot='header'>
 					{idea.title}
 				</h5>
 				<p className='idea-body' id={`p${idea._id}`}>
 					{idea.body}
 				</p>
-				<div className='btn-div'>
-					<button onClick={onClickUpdateButton} id={`${idea._id}`} className='update-btn'>
+				<ShoelaceButtonGroup slot='footer' className='idea-button-group'>
+					<ShoelaceButton onClick={onClickUpdateButton} id={`${idea._id}`} className='update-btn'>
 						Update
-					</button>
-					<button onClick={onClickDelete} id={`b2${idea._id}`} className='delete-btn'>
+					</ShoelaceButton>
+					<ShoelaceButton onClick={onClickDelete} id={`b2${idea._id}`} className='delete-btn'>
 						Delete
-					</button>
-				</div>
-			</div>
+					</ShoelaceButton>
+				</ShoelaceButtonGroup>
+			</ShoelaceCard>
 		);
 	});
 	return (

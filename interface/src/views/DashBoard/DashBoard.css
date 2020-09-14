@@ -1,10 +1,27 @@
 .idea-div {
-	background-color: #ffba08;
 	color: #151515;
 	width: 25%;
 	min-height: 40vh;
 	margin: 30px;
 	padding: 10px;
+}
+.idea-div::part(base) {
+	background: hsla(52, 83%, 44%, 1);
+
+	background: linear-gradient(90deg, hsla(52, 83%, 44%, 1) 0%, hsla(27, 92%, 47%, 1) 100%);
+
+	background: -moz-linear-gradient(90deg, hsla(52, 83%, 44%, 1) 0%, hsla(27, 92%, 47%, 1) 100%);
+
+	background: -webkit-linear-gradient(90deg, hsla(52, 83%, 44%, 1) 0%, hsla(27, 92%, 47%, 1) 100%);
+
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#CDB513", endColorstr="#E66C09", GradientType=1 );
+	border: 0px;
+}
+.idea-div::part(header) {
+	border-bottom: 2px #151515 solid;
+}
+.idea-div::part(footer) {
+	border-top: 2px #151515 solid;
 }
 .ideasDisplay {
 	display: flex;
@@ -144,20 +161,23 @@ input#file-upload-button {
 	justify-content: flex-end;
 	align-items: center;
 }
-.update-btn,
-.delete-btn {
+.update-btn::part(base),
+.delete-btn::part(base) {
 	background-color: #232324;
 	color: #6eeb83;
 	border: none;
-	padding: 5px;
-	margin: 0px 20px;
 }
-.delete-btn {
+.delete-btn::part(base) {
 	color: #ff5714;
 }
 .idea-title {
 	font-weight: bold;
 	margin-bottom: 20px;
+}
+.idea-button-group {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 }
 #screenshot-div,
 #logo-div {

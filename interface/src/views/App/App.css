@@ -9,7 +9,10 @@ body {
 	background-color: #232323;
 	box-sizing: border-box;
 }
-
+#root {
+	min-height: 100vh;
+	background-color: #232323;
+}
 ::-webkit-scrollbar {
 	width: 0px;
 	background-color: transparent;
