@@ -66,7 +66,7 @@ const Projects = () => {
 		);
 	});
 	return (
-		<div className='projects-container'>
+		<div className='projects-container animate__animated animate__fadeUp'>
 			{projectsArray}
 			{projectsArray.length ? null : <h2 style={{ margin: "50px" }}>Wow soo empty</h2>}
 		</div>
