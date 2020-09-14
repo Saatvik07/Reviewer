@@ -1,21 +1,37 @@
 .projects-container {
 	max-width: 90vw;
-	max-height: 80vh;
+	min-height: 90vh;
+	max-height: 90vh;
 	margin: 30px auto;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	overflow-y: scroll;
 	background-color: #151515;
 }
 .project-div {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	width: 35%;
 	margin: 50px;
-	background-color: #ffba08;
 	color: #151515;
+}
+.project-div::part(base) {
+	background: hsla(52, 83%, 44%, 1);
+
+	background: linear-gradient(90deg, hsla(52, 83%, 44%, 1) 0%, hsla(27, 92%, 47%, 1) 100%);
+
+	background: -moz-linear-gradient(90deg, hsla(52, 83%, 44%, 1) 0%, hsla(27, 92%, 47%, 1) 100%);
+
+	background: -webkit-linear-gradient(90deg, hsla(52, 83%, 44%, 1) 0%, hsla(27, 92%, 47%, 1) 100%);
+
+	filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#CDB513", endColorstr="#E66C09", GradientType=1 );
+	border: 0px;
+}
+.project-div::part(footer) {
+	border-top: 2px solid #232323;
 }
 .essential-div {
 	display: inline-flex;
@@ -40,6 +56,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+	text-align: left;
 	margin: 0px 20px 20px 20px;
 }
 .changeable-div h3 {
@@ -57,20 +74,22 @@
 	align-items: center;
 	margin: 30px 0;
 }
-.visitProject-btn,
-.updateProject-btn,
-.deleteProject-btn {
-	background-color: #232324;
+.open-badge::part(base),
+.closed-badge::part(base) {
+	font-size: 1rem;
+	padding: 10px;
+	color: #151515;
+	margin: 0 10px;
+}
+.button-group-btn::part(base) {
+	background-color: #232323;
 	color: lightblue;
-	border: none;
-	padding: 10px 30px;
-	font-size: 18px;
-	margin: 0px 20px;
+	border: 0px;
 }
-.updateProject-btn {
-	color: #6eeb83;
+.updateProject-btn::part(base) {
+	color: #6eeb83 !important;
 }
-.deleteProject-btn {
+.deleteProject-btn::part(base) {
 	color: #ff5714;
 }
 .project-heading {

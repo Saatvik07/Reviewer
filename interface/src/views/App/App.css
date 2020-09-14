@@ -9,14 +9,7 @@ body {
 	background-color: #232323;
 	box-sizing: border-box;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	text-align: center;
-}
+
 ::-webkit-scrollbar {
 	width: 0px;
 	background-color: transparent;

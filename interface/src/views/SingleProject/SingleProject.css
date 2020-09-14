@@ -1,7 +1,7 @@
 .singleProject-container {
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 }
 .singleProject-left-div {
 	height: 100vh;

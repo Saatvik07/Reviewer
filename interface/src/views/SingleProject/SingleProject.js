@@ -2,14 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import "./SingleProject.css";
 import { withRouter, useParams } from "react-router-dom";
 import { getProject, addOptiAndIdea } from "../../utils/helpers";
-import { Modal, Button, Tab, Tabs } from "react-bootstrap";
-import logo from "../Projects/logo.png";
+import { Tab, Tabs } from "react-bootstrap";
 import extenIcon from "./optimizeIcon.png";
 import optimizeIcon from "./extenIcon.png";
 import { userContext } from "../App/App";
-import { ShoelaceDialog, ShoelaceButton, ShoelaceAnimation } from "../../utils/ShoelaceComponents";
+import { ShoelaceDialog, ShoelaceSpinner } from "../../utils/ShoelaceComponents";
 function SingleProject() {
-	const { access, setAccess } = useContext(userContext);
+	const { access } = useContext(userContext);
 	const { id } = useParams();
 	const [project, setProject] = useState({
 		_id: 1,
@@ -243,7 +242,9 @@ function SingleProject() {
 					return (
 						<div
 							className={
-								obj.closed ? "singleOptimize-div notavailable" : "singleOptimize-div available"
+								obj.closed
+									? "singleOptimize-div notavailable  animate__animated animate__fadeInDown"
+									: "singleOptimize-div available  animate__animated animate__fadeInDown"
 							}
 							key={obj.title}
 							id={`Od${obj.title}`}
@@ -317,7 +318,9 @@ function SingleProject() {
 					return (
 						<div
 							className={
-								obj.closed ? "singleExtenIdea-div notavailable" : "singleExtenIdea-div available"
+								obj.closed
+									? "singleExtenIdea-div notavailable  animate__animated animate__fadeInDown"
+									: "singleExtenIdea-div available  animate__animated animate__fadeInDown"
 							}
 							key={obj.title}
 							id={`Ed${obj.title}`}
@@ -398,100 +401,106 @@ function SingleProject() {
 	};
 	return (
 		<div className='singleProject-container'>
-			<div className='singleProject-left-div'>
-				<img src={logo} className='singleProject-logo' />
-				<div className='singleProject-info-div'>
-					<h3>Name: {project.name}</h3>
-					<h3>Github: {project.githubRepo}</h3>
-					<h5>
-						Optimization:{" "}
-						{`${project.openOptimizations} open, ${project.closedOptimizations} closed`}
-					</h5>
-					<h5>Extended Ideas: {`${project.openIdeas} open, ${project.closedIdeas} closed`}</h5>
-				</div>
-			</div>
-			<div className='singleProject-right-div'>
-				<Tabs defaultActiveKey='Optimizations' className='singleTabGroup'>
-					<Tab title='Optimizations' eventKey='Optimizations' className='singleTab'>
-						<div className='addOptimize-div'>
-							<div className='addOptimize-input-div'>
-								<h2 style={{ color: "#ff5714" }}>Optimizations</h2>
-								<img src={optimizeIcon} className='singleProject-icon'></img>
-
-								<div
-									style={{
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "space-between",
-										width: "100%",
-									}}
-								>
-									<input
-										id='optimizationTitle'
-										className='addOptimize-input'
-										placeholder='Enter the component you want to optimize'
-										onChange={(event) => {
-											setOptimizationTitle(event.target.value);
-										}}
-									></input>
-									<button onClick={onOptimizeAdd} className='addOptimize-btn'>
-										Add
-									</button>
-								</div>
-
-								<textarea
-									id='optimizationBody'
-									className='addOptimize-input'
-									placeholder='How to optimize?'
-									maxLength='300'
-									onChange={(event) => {
-										setOptimizationBody(event.target.value);
-									}}
-								/>
-							</div>
-							<div className='showOptimize-div'>{disp}</div>
+			{project._id !== 1 ? (
+				<>
+					<div className='singleProject-left-div animate__animated animate__fadeInLeft'>
+						<img src={project.logoUrl} className='singleProject-logo' />
+						<div className='singleProject-info-div'>
+							<h3>Name: {project.name}</h3>
+							<h3>Github: {project.githubRepo}</h3>
+							<h5>
+								Optimization:{" "}
+								{`${project.openOptimizations} open, ${project.closedOptimizations} closed`}
+							</h5>
+							<h5>Extended Ideas: {`${project.openIdeas} open, ${project.closedIdeas} closed`}</h5>
 						</div>
-					</Tab>
-					<Tab title='Extended ideas' eventKey='Extended ideas' className='singleTab'>
-						<div className='addExten-div'>
-							<div className='addExten-input-div'>
-								<h2 style={{ color: "#ff5714" }}>Extended Ideas</h2>
-								<img src={extenIcon} className='singleProject-icon'></img>
-								<div
-									style={{
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "space-between",
-										width: "100%",
-									}}
-								>
-									<input
-										id='extenIdeaTitle'
-										className='addExtenIdea-input'
-										placeholder='Enter the component you want to optimize'
-										onChange={(event) => {
-											setExtenIdeaTitle(event.target.value);
-										}}
-									></input>
-									<button onClick={onExtenIdeaAdd} className='addExtenIdea-btn'>
-										Add
-									</button>
+					</div>
+					<div className='singleProject-right-div  animate__animated animate__fadeInRight'>
+						<Tabs defaultActiveKey='Optimizations' className='singleTabGroup'>
+							<Tab title='Optimizations' eventKey='Optimizations' className='singleTab'>
+								<div className='addOptimize-div'>
+									<div className='addOptimize-input-div'>
+										<h2 style={{ color: "#ff5714" }}>Optimizations</h2>
+										<img src={optimizeIcon} className='singleProject-icon'></img>
+
+										<div
+											style={{
+												display: "flex",
+												alignItems: "center",
+												justifyContent: "space-between",
+												width: "100%",
+											}}
+										>
+											<input
+												id='optimizationTitle'
+												className='addOptimize-input'
+												placeholder='Enter the component you want to optimize'
+												onChange={(event) => {
+													setOptimizationTitle(event.target.value);
+												}}
+											></input>
+											<button onClick={onOptimizeAdd} className='addOptimize-btn'>
+												Add
+											</button>
+										</div>
+
+										<textarea
+											id='optimizationBody'
+											className='addOptimize-input'
+											placeholder='How to optimize?'
+											maxLength='300'
+											onChange={(event) => {
+												setOptimizationBody(event.target.value);
+											}}
+										/>
+									</div>
+									<div className='showOptimize-div'>{disp}</div>
 								</div>
-								<textarea
-									id='extenIdeaBody'
-									className='addExtenIdea-input'
-									placeholder='How to optimize?'
-									maxLength='300'
-									onChange={(event) => {
-										setExtenIdeaBody(event.target.value);
-									}}
-								/>
-							</div>
-							<div className='showExtenIdea-div'>{ideaDisp}</div>
-						</div>
-					</Tab>
-				</Tabs>
-			</div>
+							</Tab>
+							<Tab title='Extended ideas' eventKey='Extended ideas' className='singleTab'>
+								<div className='addExten-div'>
+									<div className='addExten-input-div'>
+										<h2 style={{ color: "#ff5714" }}>Extended Ideas</h2>
+										<img src={extenIcon} className='singleProject-icon'></img>
+										<div
+											style={{
+												display: "flex",
+												alignItems: "center",
+												justifyContent: "space-between",
+												width: "100%",
+											}}
+										>
+											<input
+												id='extenIdeaTitle'
+												className='addExtenIdea-input'
+												placeholder='Enter the component you want to optimize'
+												onChange={(event) => {
+													setExtenIdeaTitle(event.target.value);
+												}}
+											></input>
+											<button onClick={onExtenIdeaAdd} className='addExtenIdea-btn'>
+												Add
+											</button>
+										</div>
+										<textarea
+											id='extenIdeaBody'
+											className='addExtenIdea-input'
+											placeholder='How to optimize?'
+											maxLength='300'
+											onChange={(event) => {
+												setExtenIdeaBody(event.target.value);
+											}}
+										/>
+									</div>
+									<div className='showExtenIdea-div'>{ideaDisp}</div>
+								</div>
+							</Tab>
+						</Tabs>
+					</div>
+				</>
+			) : (
+				<ShoelaceSpinner className='refresh-spinner'></ShoelaceSpinner>
+			)}
 			{showModal}
 		</div>
 	);

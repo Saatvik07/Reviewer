@@ -16,3 +16,4 @@ export const ShoelaceTab = wrapCustomElement("sl-tab");
 export const ShoelaceTooltip = wrapCustomElement("sl-tooltip");
 export const ShoelaceBadge = wrapCustomElement("sl-badge");
 export const ShoelaceDrawer = wrapCustomElement("sl-drawer");
+export const ShoelaceCard = wrapCustomElement("sl-card");
