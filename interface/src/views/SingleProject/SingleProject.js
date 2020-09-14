@@ -32,13 +32,13 @@ function SingleProject() {
 	const [disp, setDisp] = useState([]);
 	const [ideaDisp, setIdeaDisp] = useState([]);
 	const [showModal, setShowModal] = useState(null);
-	// useEffect(() => {
-	// 	getProject(id, access).then((response) => {
-	// 		if (response) {
-	// 			setProject(response);
-	// 		}
-	// 	});
-	// }, []);
+	useEffect(() => {
+		getProject(id, access).then((response) => {
+			if (response) {
+				setProject(response);
+			}
+		});
+	}, []);
 	const handleOpen = (event) => {
 		const id = event.target.id.slice(4);
 		let prefix;

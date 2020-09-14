@@ -22,25 +22,29 @@ function Login() {
 		loginUser(email, password).then((response) => {
 			if (response.message === "not found") {
 				setType(
-					<ShoelaceAnimation name='shake' duration='1000' iterations='1'>
-						<ShoelaceAlert type='warning' open className='loggedIn'>
-							<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
-							<strong>Sorry :|</strong>
-							<br />
-							The email entered is not registered
-						</ShoelaceAlert>
-					</ShoelaceAnimation>,
+					<ShoelaceAlert
+						type='warning'
+						open
+						className='loggedIn animate__animated animate__fadeInUp'
+					>
+						<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
+						<strong>Sorry :|</strong>
+						<br />
+						The email entered is not registered
+					</ShoelaceAlert>,
 				);
 			} else if (response.message === "wrong password") {
 				setType(
-					<ShoelaceAnimation name='shake' duration='1000' iterations='1'>
-						<ShoelaceAlert type='warning' open className='loggedIn'>
-							<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
-							<strong>Uh Oh!!!</strong>
-							<br />
-							The password is incorrect
-						</ShoelaceAlert>
-					</ShoelaceAnimation>,
+					<ShoelaceAlert
+						type='warning'
+						open
+						className='loggedIn animate__animated animate__fadeInUp'
+					>
+						<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
+						<strong>Uh Oh!!!</strong>
+						<br />
+						The password is incorrect
+					</ShoelaceAlert>,
 				);
 			} else {
 				localStorage.setItem("sessionID", response.sessionID);
@@ -57,53 +61,49 @@ function Login() {
 	}
 	return (
 		<div className='login-container'>
-			<ShoelaceAnimation name='fade-in' duration={1500} iterations={1}>
-				<div className='login-container-left'>
-					<h1>Sign in</h1>
-					<ShoelaceForm
-						className='login-form'
-						onSlSubmit={(event) => {
-							onClickLogin(event.detail.formData);
-						}}
-					>
-						<ShoelaceInput
-							label='Email'
-							name='email'
-							className='inputs'
-							type='email'
-							required={true}
-						/>
-						<ShoelaceInput
-							label='Password'
-							name='password'
-							className='inputs'
-							type='password'
-							togglePassword={true}
-							required={true}
-						/>
-						<Link to='/forgot_password'>
-							<h6 style={{ color: "#777" }}>Forgot password ?</h6>
-						</Link>
-						<ShoelaceButton className='signup-btn' size='large' pill submit>
-							<ShoelaceIcon slot='prefix' name='check-circle'></ShoelaceIcon>
-							Submit
-						</ShoelaceButton>
-					</ShoelaceForm>
-					{type}
+			<div className='login-container-left animate__animated animate__fadeInUp'>
+				<h1>Sign in</h1>
+				<ShoelaceForm
+					className='login-form'
+					onSlSubmit={(event) => {
+						onClickLogin(event.detail.formData);
+					}}
+				>
+					<ShoelaceInput
+						label='Email'
+						name='email'
+						className='inputs'
+						type='email'
+						required={true}
+					/>
+					<ShoelaceInput
+						label='Password'
+						name='password'
+						className='inputs'
+						type='password'
+						togglePassword={true}
+						required={true}
+					/>
+					<Link to='/forgot_password'>
+						<h6 style={{ color: "#777" }}>Forgot password ?</h6>
+					</Link>
+					<ShoelaceButton className='signup-btn' size='large' pill submit>
+						<ShoelaceIcon slot='prefix' name='check-circle'></ShoelaceIcon>
+						Submit
+					</ShoelaceButton>
+				</ShoelaceForm>
+				{type}
+			</div>
+			<div className='login-container-right animate__animated animate__fadeInUp'>
+				<h3>OR</h3>
+				<br />
+				<br />
+				<h4>Sign In using:</h4>
+				<div id='customBtn' onClick={clickGoogle}>
+					<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
+					<span class='buttonText'>Google</span>
 				</div>
-			</ShoelaceAnimation>
-			<ShoelaceAnimation name='fade-in' duration={1500} iterations={1}>
-				<div className='login-container-right'>
-					<h3>OR</h3>
-					<br />
-					<br />
-					<h4>Sign In using:</h4>
-					<div id='customBtn' onClick={clickGoogle}>
-						<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
-						<span class='buttonText'>Google</span>
-					</div>
-				</div>
-			</ShoelaceAnimation>
+			</div>
 		</div>
 	);
 }

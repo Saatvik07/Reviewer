@@ -52,6 +52,7 @@ projectRouter.get("/:id", verifyRefreshToken, (req, res, next) => {
 	const access_token = req.headers.authorization.split(" ")[1];
 	jwt.verify(access_token, process.env.ACCESS_TOKEN_SECRET, async (err, payload) => {
 		if (err) {
+			console.log(err);
 			res.send(403);
 		} else {
 			const userID = payload.sub;
@@ -69,6 +70,7 @@ projectRouter.get("/:id", verifyRefreshToken, (req, res, next) => {
 				}
 			});
 		}
+		vv;
 	});
 });
 projectRouter.put("/:id", verifyRefreshToken, (req, res, next) => {

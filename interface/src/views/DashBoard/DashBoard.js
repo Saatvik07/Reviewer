@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./DashBoard.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { withRouter, useLocation } from "react-router-dom";
 import { addProject, addIdea, getIdea, updateIdea, deleteIdea } from "../../utils/helpers";
 import { userContext } from "../App/App";
@@ -11,9 +13,9 @@ import {
 	ShoelaceIcon,
 	ShoelaceIconButton,
 	ShoelaceSpinner,
+	ShoelaceDrawer,
 } from "../../utils/ShoelaceComponents";
-let showIdeaModal = 0,
-	showProjectModal = 0;
+
 function useQuery() {
 	return new URLSearchParams(useLocation().search);
 }
@@ -34,6 +36,7 @@ const DashBoard = () => {
 	const { access, setAccess } = useContext(userContext);
 	const query = useQuery();
 	useEffect(() => {
+		AOS.init();
 		if (query.get("code")) {
 			const code = query.get("code");
 			const fetchOptions = {
@@ -59,9 +62,9 @@ const DashBoard = () => {
 			getIdea(access).then((response) => {
 				if (response) {
 					setIdeas(JSON.parse(JSON.stringify(response)));
+					setShowModal(<ShoelaceDrawer label='Hi there, Saatvik ' open={true}></ShoelaceDrawer>);
 				}
 			});
-		} else {
 		}
 	}, [access]);
 	function onSaveIdeaClick() {
@@ -73,7 +76,6 @@ const DashBoard = () => {
 			addIdea(ideaObj, access).then((idea) => {
 				const arr = ideas;
 				arr.push(idea);
-				showIdeaModal = 1;
 				setIdeas(arr);
 				if (ideas.length > 0) {
 					setShowModal(
@@ -253,7 +255,13 @@ const DashBoard = () => {
 	}
 	const ideasArray = ideas.map((idea) => {
 		return (
-			<div className='idea-div' id={`d${idea._id}`} key={`${idea._id}`}>
+			<div
+				className='idea-div'
+				data-aos='slide-left'
+				data-aos-anchor={`#p${idea._id}`}
+				id={`d${idea._id}`}
+				key={`${idea._id}`}
+			>
 				<h5 id={`h${idea._id}`} className='idea-title'>
 					{idea.title}
 				</h5>
@@ -275,7 +283,7 @@ const DashBoard = () => {
 		<div className='dashboard-container'>
 			{access ? (
 				<>
-					<div className='addProject-container'>
+					<div className='addProject-container animate__animated animate__fadeIn'>
 						<h3 className='addIdea-heading'>Add Project</h3>
 						<div className='text-inputs'>
 							<div className='addProject-input-headings'>
@@ -404,7 +412,7 @@ const DashBoard = () => {
 							Save Project
 						</button>
 					</div>
-					<div className='addIdea-container'>
+					<div className='addIdea-container animate__animated animate__fadeIn'>
 						<h3 className='addIdea-heading'>Add Idea</h3>
 						<h4 className='addProject-headings'>Title</h4>
 						<input
@@ -433,11 +441,11 @@ const DashBoard = () => {
 						</button>
 						{showModal}
 					</div>
-					<div className='showIdea-container'>
+					<div className='showIdea-container animate__animated animate__fadeIn' data-aos='fade-up'>
 						<h2 style={{ color: "#ffba08", textAlign: "center", marginTop: "50px" }}>
 							Potential Projects
 						</h2>
-						<div className='ideasDisplay'>
+						<div className='ideasDisplay' id='a'>
 							{ideasArray.length ? ideasArray : <h1>Wow soo empty</h1>}
 						</div>
 					</div>

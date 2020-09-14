@@ -22,25 +22,29 @@ const Signup = () => {
 		registerUser(username, email, password).then((result) => {
 			if (result.message === "sent") {
 				setType(
-					<ShoelaceAnimation name='shake' duration='1000' iterations='1'>
-						<ShoelaceAlert type='success' className='email-successful' open>
-							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
-							<strong>Email sent to {`${email}`}</strong>
-							<br />
-							You can close this window
-						</ShoelaceAlert>
-					</ShoelaceAnimation>,
+					<ShoelaceAlert
+						type='success'
+						className='email-successful animate__animated animate__fadeInUp'
+						open
+					>
+						<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
+						<strong>Email sent to {`${email}`}</strong>
+						<br />
+						You can close this window
+					</ShoelaceAlert>,
 				);
 			} else if (result.message === "already in use") {
 				setType(
-					<ShoelaceAnimation name='shake' duration='1000' iterations='1'>
-						<ShoelaceAlert type='warning' className='email-unsuccessful' open>
-							<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
-							<strong>Such Coincidence</strong>
-							<br />
-							This email is already in use
-						</ShoelaceAlert>
-					</ShoelaceAnimation>,
+					<ShoelaceAlert
+						type='warning'
+						className='email-unsuccessful animate__animated animate__fadeInUp'
+						open
+					>
+						<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
+						<strong>Such Coincidence</strong>
+						<br />
+						This email is already in use
+					</ShoelaceAlert>,
 				);
 			}
 		});
@@ -53,59 +57,53 @@ const Signup = () => {
 	}
 	return (
 		<div className='signup-container'>
-			<ShoelaceAnimation name='fade-in' duration={1000} iterations={1}>
-				<div className='signup-left-div'>
-					<h2>SignUp</h2>
-					<ShoelaceForm
-						className='signup-form'
-						onSlSubmit={(event) => {
-							onClickSignUp(event.detail.formData);
-						}}
-					>
-						<ShoelaceInput label='Username' name='username' className='inputs' required={true} />
-						<ShoelaceInput
-							label='Email'
-							name='email'
-							className='inputs'
-							type='email'
-							required={true}
-						/>
-						<ShoelaceInput
-							label='Password'
-							name='password'
-							className='inputs'
-							type='password'
-							togglePassword={true}
-							required={true}
-						/>
+			<div className='signup-left-div animate__animated animate__fadeInUp'>
+				<h2>SignUp</h2>
+				<ShoelaceForm
+					className='signup-form'
+					onSlSubmit={(event) => {
+						onClickSignUp(event.detail.formData);
+					}}
+				>
+					<ShoelaceInput label='Username' name='username' className='inputs' required={true} />
+					<ShoelaceInput
+						label='Email'
+						name='email'
+						className='inputs'
+						type='email'
+						required={true}
+					/>
+					<ShoelaceInput
+						label='Password'
+						name='password'
+						className='inputs'
+						type='password'
+						togglePassword={true}
+						required={true}
+					/>
 
-						<ShoelaceButton className='signup-btn' size='large' pill submit>
-							<ShoelaceIcon slot='prefix' name='check-circle'></ShoelaceIcon>
-							Submit
-						</ShoelaceButton>
-					</ShoelaceForm>
+					<ShoelaceButton className='signup-btn' size='large' pill submit>
+						<ShoelaceIcon slot='prefix' name='check-circle'></ShoelaceIcon>
+						Submit
+					</ShoelaceButton>
+				</ShoelaceForm>
+			</div>
+			<div style={{ marginLeft: "50px" }} className='animate__animated animate__fadeInUp'>
+				<h3>OR</h3>
+			</div>
+			<div className='signup-right-div animate__animated animate__fadeInUp'>
+				<h4>Sign In using:</h4>
+				<div id='customBtn' onClick={clickGoogle}>
+					<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
+					<span class='buttonText'>Google</span>
 				</div>
-				<ShoelaceAnimation name='fade-in' duration={1000} iterations={1}>
-					<div style={{ marginLeft: "50px" }}>
-						<h3>OR</h3>
-					</div>
-				</ShoelaceAnimation>
-			</ShoelaceAnimation>
-			<ShoelaceAnimation name='fade-in' duration={1000} iterations={1}>
-				<div className='signup-right-div'>
-					<h4>Sign In using:</h4>
-					<div id='customBtn' onClick={clickGoogle}>
-						<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />
-						<span class='buttonText'>Google</span>
-					</div>
-					<br />
-					<br />
-					<h4>
-						Already have an account ? <a href='http://localhost:3000/login'>Sign-in</a>
-					</h4>
-					{type}
-				</div>
-			</ShoelaceAnimation>
+				<br />
+				<br />
+				<h4>
+					Already have an account ? <a href='http://localhost:3000/login'>Sign-in</a>
+				</h4>
+				{type}
+			</div>
 		</div>
 	);
 };

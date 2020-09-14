@@ -13,37 +13,41 @@ function NavBar() {
 		logoutUser(access);
 	}
 	return (
-		<div className='navbar-container'>
+		<div className='navbar-container animate__animated animate__fadeInDown'>
 			<div className='nav-options'>
 				{access ? (
 					<>
-						<Link to='/dashboard'>
-							<button
-								className='nav-btn'
-								onClick={(event) => {
-									setNav(event.target.id);
-								}}
-								id='dashboard'
-							>
-								Dashboard
-							</button>
-						</Link>
-						<Link to='/projects'>
-							<button
-								className='nav-btn'
-								onClick={(event) => {
-									setNav(event.target.id);
-								}}
-								id='projects'
-							>
-								Projects
-							</button>
-						</Link>
-						<Link to='/'>
-							<button className='nav-btn' onClick={logOut} id='log'>
-								Sign Out
-							</button>
-						</Link>{" "}
+						<div className='nav-btn'>
+							<Link to='/dashboard'>
+								<button
+									onClick={(event) => {
+										setNav(event.target.id);
+									}}
+									id='dashboard'
+								>
+									Dashboard
+								</button>
+							</Link>
+						</div>
+						<div className='nav-btn'>
+							<Link to='/projects'>
+								<button
+									onClick={(event) => {
+										setNav(event.target.id);
+									}}
+									id='projects'
+								>
+									Projects
+								</button>
+							</Link>
+						</div>
+						<div className='nav-btn'>
+							<Link to='/'>
+								<button onClick={logOut} id='log'>
+									Sign Out
+								</button>
+							</Link>{" "}
+						</div>
 					</>
 				) : (
 					<>
@@ -77,7 +81,7 @@ function NavBar() {
 							<Link to='/login'>
 								{access ? (
 									<>
-										<ShoelaceIcon name='box-arrow-left' className='nav-icon'></ShoelaceIcon>
+										<ShoelaceIcon name='arrow-left-circle' className='nav-icon'></ShoelaceIcon>
 										<button onClick={logOut} id='log'>
 											Sign out
 										</button>
