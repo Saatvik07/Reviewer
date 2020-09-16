@@ -111,20 +111,20 @@ const Projects = () => {
 					<div className='project-btn-div' slot='footer'>
 						<ShoelaceButtonGroup>
 							<Link to={`/single_project/${project._id}`}>
-								<ShoelaceButton size='large' className='button-group-btn updateProject-btn'>
+								<ShoelaceButton size='medium' className='button-group-btn updateProject-btn'>
 									Open
 								</ShoelaceButton>
 							</Link>
 
 							<ShoelaceButton
 								id={`${project._id}`}
-								size='large'
+								size='medium'
 								className='button-group-btn deleteProject-btn'
 								onClick={onProjectDelete}
 							>
 								Delete
 							</ShoelaceButton>
-							<ShoelaceButton size='large' className='button-group-btn'>
+							<ShoelaceButton size='medium' className='button-group-btn'>
 								Visit
 							</ShoelaceButton>
 						</ShoelaceButtonGroup>

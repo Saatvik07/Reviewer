@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Signup.css";
 import { withRouter } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { registerUser, registerUserGoogle } from "../../utils/helpers";
 import GoogleLogo from "./googleLogo.png";
 import {
@@ -10,15 +12,18 @@ import {
 	ShoelaceIcon,
 	ShoelaceAlert,
 	ShoelaceSpinner,
-	ShoelaceAnimation,
 } from "../../utils/ShoelaceComponents";
 const Signup = () => {
 	const [type, setType] = useState();
+	useEffect(() => {
+		AOS.init();
+	}, []);
 	function onClickSignUp(formData) {
 		const username = formData.get("username");
 		const password = formData.get("password");
 		const email = formData.get("email");
 		setType(<ShoelaceSpinner className='email-sending'></ShoelaceSpinner>);
+
 		registerUser(username, email, password).then((result) => {
 			if (result.message === "sent") {
 				setType(
@@ -88,10 +93,18 @@ const Signup = () => {
 					</ShoelaceButton>
 				</ShoelaceForm>
 			</div>
-			<div style={{ marginLeft: "50px" }} className='animate__animated animate__fadeInUp'>
+			<div
+				className='animate__animated animate__fadeInUp or-div'
+				data-aos='fade-up'
+				data-aos-anchor-placement='top-top'
+			>
 				<h3>OR</h3>
 			</div>
-			<div className='signup-right-div animate__animated animate__fadeInUp'>
+			<div
+				className='signup-right-div animate__animated animate__fadeInUp'
+				data-aos='fade-up'
+				data-aos-anchor-placement='top-top'
+			>
 				<h4>Sign In using:</h4>
 				<div id='customBtn' onClick={clickGoogle}>
 					<img src={GoogleLogo} style={{ width: "50px", height: "auto" }} />

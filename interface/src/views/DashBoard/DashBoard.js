@@ -93,7 +93,15 @@ const DashBoard = () => {
 					}
 					setShowModal(
 						<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
-							<ShoelaceAlert type='success' className='savedIdea-successful' open closeable>
+							<ShoelaceAlert type='success' className='savedIdea-successful' open>
+								<div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+									<ShoelaceIconButton
+										name='x-circle-fill'
+										className='modal-closeBtn'
+										size='large'
+										style={{ margin: "0 10px" }}
+									></ShoelaceIconButton>
+								</div>
 								<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
 								<strong>Saved !!!</strong>
 								<br />
@@ -127,7 +135,15 @@ const DashBoard = () => {
 				}
 				setShowModal(
 					<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
-						<ShoelaceAlert type='success' className='savedIdea-successful' open closeable>
+						<ShoelaceAlert type='success' className='savedIdea-successful' open>
+							<div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+								<ShoelaceIconButton
+									name='x-circle-fill'
+									className='modal-closeBtn'
+									size='large'
+									style={{ margin: "0 10px" }}
+								></ShoelaceIconButton>
+							</div>
 							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
 							<strong>Updated !!!</strong>
 							<br />
@@ -172,7 +188,15 @@ const DashBoard = () => {
 				}
 				setShowModal(
 					<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
-						<ShoelaceAlert type='success' className='savedIdea-successful' open closeable>
+						<ShoelaceAlert type='success' className='savedIdea-successful' open>
+							<div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+								<ShoelaceIconButton
+									name='x-circle-fill'
+									className='modal-closeBtn'
+									size='large'
+									style={{ margin: "0 10px" }}
+								></ShoelaceIconButton>
+							</div>
 							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
 							<strong>Saved !!!</strong>
 							<br />

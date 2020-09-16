@@ -104,6 +104,12 @@
 	.project-div {
 		width: 80%;
 	}
+	.project-div::part(base) {
+		width: 100%;
+	}
+	.info-div > h5 {
+		font-size: 16px;
+	}
 	.info-div h4,
 	.changeable-div h4 {
 		font-size: 16px;
@@ -111,18 +117,29 @@
 	.changeable-div {
 		margin: 0 20px 10px 20px;
 	}
+	.changeable-div > h5 {
+		font-size: 16px;
+	}
 	.project-btn-div {
 		margin: 15px 0;
 	}
-	.visitProject-btn,
-	.deleteProject-btn,
-	.updateProject-btn {
-		font-size: 14px;
-		padding: 10px 15px;
-		margin: 0 10px;
-	}
+
 	.essential-div img {
 		width: 75px;
 		height: auto;
+	}
+	.essential-div {
+		margin: 20px 0;
+	}
+	.open-badge::part(base),
+	.closed-badge::part(base) {
+		margin: 0px 5px;
+		padding: 5px;
+	}
+	.button-group-btn > button {
+		line-height: 30px !important;
+		font-size: 20px !important;
+	}
+	button {
 	}
 }

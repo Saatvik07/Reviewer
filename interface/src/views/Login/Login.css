@@ -36,6 +36,7 @@ span.buttonText {
 .login-container {
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 	align-items: center;
 	color: #ff5714;
 }
@@ -61,4 +62,10 @@ span.buttonText {
 	border: 2px #232323 solid !important;
 	border-top: 5px orange solid !important;
 	color: #ff5714;
+}
+@media only screen and (max-width: 1020px) {
+	.login-container-left {
+		width: 80%;
+		margin: 50px 30px;
+	}
 }
