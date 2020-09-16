@@ -88,20 +88,14 @@ const DashBoard = () => {
 				arr.push(idea);
 				setIdeas(arr);
 				if (ideas.length > 0) {
+					if (document.querySelector("savedIdea-successful")) {
+						document.querySelector("savedIdea-successful").hide();
+					}
 					setShowModal(
 						<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
-							<ShoelaceAlert type='success' className='savedIdea-successful' open>
+							<ShoelaceAlert type='success' className='savedIdea-successful' open closeable>
 								<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
 								<strong>Saved !!!</strong>
-								<ShoelaceIconButton
-									name='x-circle-fill'
-									className='modal-closeBtn'
-									size='large'
-									style={{ marginLeft: "60%" }}
-									onClick={() => {
-										setShowModal(null);
-									}}
-								></ShoelaceIconButton>
 								<br />
 								The idea {ideaTitle} has been saved
 								<br />
@@ -128,20 +122,14 @@ const DashBoard = () => {
 				const updatedArray = ideas;
 				updatedArray.push(idea);
 				setIdeas(updatedArray);
+				if (document.querySelector("savedIdea-successful")) {
+					document.querySelector("savedIdea-successful").hide();
+				}
 				setShowModal(
 					<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
-						<ShoelaceAlert type='success' className='savedIdea-successful' open>
+						<ShoelaceAlert type='success' className='savedIdea-successful' open closeable>
 							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
 							<strong>Updated !!!</strong>
-							<ShoelaceIconButton
-								name='x-circle-fill'
-								className='modal-closeBtn'
-								size='large'
-								style={{ marginLeft: "60%" }}
-								onClick={() => {
-									setShowModal(null);
-								}}
-							></ShoelaceIconButton>
 							<br />
 							The idea {ideaTitle} has been updated
 							<br />
@@ -150,6 +138,7 @@ const DashBoard = () => {
 				);
 				setIdeaTitle("");
 				setIdeaBody("");
+				setUpdate(0);
 			});
 		}
 	}
@@ -178,20 +167,14 @@ const DashBoard = () => {
 		};
 		addProject(project, access).then((response) => {
 			if (response.name) {
+				if (document.querySelector("savedIdea-successful")) {
+					document.querySelector("savedIdea-successful").hide();
+				}
 				setShowModal(
 					<ShoelaceAnimation name='wobble' duration='1000' iterations='1'>
-						<ShoelaceAlert type='success' className='savedIdea-successful' open>
+						<ShoelaceAlert type='success' className='savedIdea-successful' open closeable>
 							<ShoelaceIcon slot='icon' name='check2-circle'></ShoelaceIcon>
 							<strong>Saved !!!</strong>
-							<ShoelaceIconButton
-								name='x-circle-fill'
-								className='modal-closeBtn'
-								size='large'
-								style={{ marginLeft: "60%" }}
-								onClick={() => {
-									setShowModal(null);
-								}}
-							></ShoelaceIconButton>
 							<br />
 							The project {name} has been saved
 							<br />

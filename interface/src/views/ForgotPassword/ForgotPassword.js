@@ -8,11 +8,13 @@ import {
 	ShoelaceAlert,
 	ShoelaceIcon,
 	ShoelaceButton,
+	ShoelaceSpinner,
 } from "../../utils/ShoelaceComponents";
 import { forgotPassword } from "../../utils/helpers";
 function ForgotPassword() {
 	const [prompt, setPrompt] = useState(null);
 	function onClickSend(formData) {
+		setPrompt(<ShoelaceSpinner className='waitEmail-spinner'></ShoelaceSpinner>);
 		const email = formData.get("email");
 		forgotPassword(email).then((response) => {
 			if (response.message === "not found") {

@@ -209,6 +209,10 @@ input[type="file"] {
 	border-top: 5px green solid !important;
 	color: #ff5714;
 }
+.savedIdea-successful::part(close-button) {
+	background-color: #ff5714;
+	color: #ff5714;
+}
 .modal-closeBtn::part(base) {
 	color: #ff5714;
 	transition: all 0.5s linear;

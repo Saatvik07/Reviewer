@@ -77,7 +77,7 @@ projectRouter.put("/:id", verifyRefreshToken, (req, res, next) => {
 	const access_token = req.headers.authorization.split(" ")[1];
 	jwt.verify(access_token, process.env.ACCESS_TOKEN_SECRET, async (err, payload) => {
 		if (err) {
-			res.send(403);
+			res.sendStatus(403);
 		} else {
 			const userID = payload.sub;
 			if (req.body.optimizations) {
@@ -133,6 +133,34 @@ projectRouter.put("/:id", verifyRefreshToken, (req, res, next) => {
 					}
 				});
 			}
+		}
+	});
+});
+projectRouter.delete("/:id", verifyRefreshToken, (req, res, next) => {
+	const access_token = req.headers.authorization.split(" ")[1];
+	jwt.verify(access_token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
+		if (err) {
+			res.sendStatus(403);
+		} else {
+			const userID = payload.sub;
+			projectModel.findById(req.params.id, (err, doc) => {
+				if (err) {
+					res.sendStatus(404);
+				} else {
+					if (doc.userID === userID) {
+						projectModel.findByIdAndRemove(req.params.id, (err, response) => {
+							if (err) {
+								console.log("Cannot delete the project");
+							} else {
+								console.log("Deleted the project" + response.name);
+								res.status(204).send(response);
+							}
+						});
+					} else {
+						res.sendStatus(401);
+					}
+				}
+			});
 		}
 	});
 });

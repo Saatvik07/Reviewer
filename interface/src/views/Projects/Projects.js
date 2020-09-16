@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Projects.css";
 import { withRouter, Link } from "react-router-dom";
-import { getProjects } from "../../utils/helpers";
+import { deleteProject, getProjects } from "../../utils/helpers";
 import { userContext } from "../App/App";
 import {
 	ShoelaceSpinner,
@@ -9,10 +9,13 @@ import {
 	ShoelaceButtonGroup,
 	ShoelaceButton,
 	ShoelaceBadge,
+	ShoelaceAlert,
+	ShoelaceIcon,
 } from "../../utils/ShoelaceComponents";
 const Projects = () => {
 	const [projects, setProjects] = useState(null);
-	const { access, setAccess } = useContext(userContext);
+	const { access } = useContext(userContext);
+	const [message, setMessage] = useState(null);
 	useEffect(() => {
 		if (access) {
 			getProjects(access).then((arr) => {
@@ -22,6 +25,26 @@ const Projects = () => {
 			});
 		}
 	}, [access]);
+	const onProjectDelete = (event) => {
+		const id = event.target.id;
+		deleteProject(id, access).then((response) => {
+			if (response.message) {
+				setMessage(
+					<ShoelaceAlert
+						type='warning'
+						open
+						className='loggedIn animate__animated animate__fadeInUp'
+					>
+						<ShoelaceIcon slot='icon' name='exclamation-octagon'></ShoelaceIcon>
+						<strong>Deleted</strong>
+						<br />
+						{`${response.name} has been deleted`}
+					</ShoelaceAlert>,
+				);
+			} else {
+			}
+		});
+	};
 	let projectsArray = null;
 	if (projects) {
 		projectsArray = projects.map((project) => {
@@ -56,13 +79,15 @@ const Projects = () => {
 								pill
 								pulse
 								className='open-badge'
-							>{` ${project.openOptimizations} open`}</ShoelaceBadge>
+							>{` ${project.openOptimizations}`}</ShoelaceBadge>
+							open
 							<ShoelaceBadge
 								type='success'
 								pill
 								pulse
 								className='closed-badge'
-							>{`${project.closedOptimizations} closed`}</ShoelaceBadge>
+							>{`${project.closedOptimizations}`}</ShoelaceBadge>
+							close
 						</h5>
 						<h5>
 							<span className='project-heading'>Extended Ideas:</span>
@@ -71,13 +96,15 @@ const Projects = () => {
 								pill
 								pulse
 								className='open-badge'
-							>{` ${project.openIdeas} open`}</ShoelaceBadge>
+							>{` ${project.openIdeas}`}</ShoelaceBadge>
+							open
 							<ShoelaceBadge
 								type='success'
 								pill
 								pulse
 								className='closed-badge'
-							>{`${project.closedIdeas} closed`}</ShoelaceBadge>
+							>{`${project.closedIdeas}`}</ShoelaceBadge>
+							close
 						</h5>
 					</div>
 
@@ -89,7 +116,12 @@ const Projects = () => {
 								</ShoelaceButton>
 							</Link>
 
-							<ShoelaceButton size='large' className='button-group-btn deleteProject-btn'>
+							<ShoelaceButton
+								id={`${project._id}`}
+								size='large'
+								className='button-group-btn deleteProject-btn'
+								onClick={onProjectDelete}
+							>
 								Delete
 							</ShoelaceButton>
 							<ShoelaceButton size='large' className='button-group-btn'>
@@ -104,6 +136,7 @@ const Projects = () => {
 
 	return (
 		<div className='projects-container animate__animated animate__slideInUp'>
+			{message}
 			{projectsArray}
 			{projectsArray ? (
 				projectsArray.length ? null : (

@@ -45,6 +45,23 @@ export const getProject = (id, accessToken) => {
 		}
 	});
 };
+export const deleteProject = (id, accessToken) => {
+	let url = `${baseUrl}/projects/${id}`;
+	const fetchOptions = {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+			authorization: `Bearer ${accessToken}`,
+		},
+	};
+	return fetch(url, fetchOptions).then((response) => {
+		if (response.status === 204) {
+			return response.json();
+		} else {
+			return { message: "Cannot delete idea" };
+		}
+	});
+};
 export const addIdea = (idea, accessToken) => {
 	let url = `${baseUrl}/idea`;
 	const fetchOptions = {
