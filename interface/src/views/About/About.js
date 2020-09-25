@@ -12,12 +12,12 @@ import ReactLogo from "./react.png";
 import Node from "./node.png";
 import Mongo from "./mongo.png";
 function About() {
-	const [height, setHeight] = useState(350);
-	const [width, setWidth] = useState(600);
+	const [height, setHeight] = useState(600);
+	const [width, setWidth] = useState(800);
 	const [logo, setLogo] = useState(50);
 	useEffect(() => {
 		if (window.innerWidth < 721) {
-			setHeight(150);
+			setHeight(300);
 			setWidth(300);
 			setLogo(25);
 		} else if (window.innerWidth >= 721 && window.innerWidth <= 1020) {
@@ -315,7 +315,7 @@ function About() {
 							About
 						</ShoelaceTab>
 						<ShoelaceTab slot='nav' panel='Tech-Stack' className='tab'>
-							Tech Stack
+							Credits
 						</ShoelaceTab>
 						<ShoelaceTabPanel name='about' class='tab-panel'>
 							Reviewer is an easy to use web app which saves you from the hassle of remembering all
@@ -325,30 +325,39 @@ function About() {
 							the go, open and close them as and when they are ready to be deployed.about-container
 						</ShoelaceTabPanel>
 						<ShoelaceTabPanel name='Tech-Stack' class='tab-panel'>
-							<div className='logo-bar'>
-								<img
-									src={ReactLogo}
-									style={{ width: `${logo}px`, height: "auto", margin: "10px" }}
-								/>
-								<img
-									src={Express}
-									style={{
-										width: `${logo}px`,
-										height: "auto",
-										margin: "10px",
-									}}
-								/>
-								<img src={Mongo} style={{ width: `${logo}px`, height: "auto", margin: "10px" }} />
-								<img src={Node} style={{ width: `${logo}px`, height: "auto", margin: "10px" }} />
-								<img
-									src={Shoelace}
-									style={{ width: `${logo}px`, height: "auto", margin: "10px" }}
-								/>
-							</div>
 							<ol>
-								<li>React for front-end</li>
-								<li>Express , MongoDB and NodeJS for back-end</li>
-								<li>Shoelace for Web Components</li>
+								<li>Made By: Saatvik Bhatnagar © 2020</li>
+								<li>Made with: M(Mongo) E(Express) R(React) N(NodeJS)</li>
+								<li>
+									WebComponents: <a href='https://shoelace.style'>Shoelace</a>
+								</li>
+								<li>
+									Icons made by{" "}
+									<a href='https://www.flaticon.com/authors/freepik' title='Freepik'>
+										Freepik
+									</a>
+									{", "}
+									<a href='https://www.flaticon.com/authors/pixel-perfect' title='Pixel perfect'>
+										Pixel perfect
+									</a>
+									{", "}
+									<a href='https://www.flaticon.com/free-icon/email_321817' title='Vectors Market'>
+										Vectors Market
+									</a>
+									{", "}
+									<a href='https://www.flaticon.com/authors/ultimatearm' title='ultimatearm'>
+										ultimatearm
+									</a>
+									{", "}
+									<a href='https://www.flaticon.com/authors/xnimrodx' title='xnimrodx'>
+										xnimrodx
+									</a>
+									from{" "}
+									<a href='https://www.flaticon.com/' title='Flaticon'>
+										{" "}
+										www.flaticon.com
+									</a>
+								</li>
 							</ol>
 						</ShoelaceTabPanel>
 					</ShoelaceTabGroup>

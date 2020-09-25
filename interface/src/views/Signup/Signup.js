@@ -122,39 +122,3 @@ const Signup = () => {
 };
 
 export default withRouter(Signup);
-// Icons made by <a href="https://www.flaticon.com/free-icon/email_321817" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-{
-	/* <input
-				id='username'
-				type='text'
-				className='signup-input'
-				placeholder='Enter the username'
-				value={username}
-				onChange={(event) => {
-					setUsername(event.target.value);
-				}}
-			/> 
-			<input
-				id='email'
-				type='email'
-				className='signup-input'
-				placeholder='Enter the email'
-				value={email}
-				onChange={(event) => {
-					setEmail(event.target.value);
-				}}
-			/>
-			<input
-				id='password'
-				type='password'
-				className='signup-input'
-				placeholder='Enter the password'
-				value={password}
-				onChange={(event) => {
-					setPassword(event.target.value);
-				}}
-			/>
-			<button className='signup-btn' onClick={onClickSignUp}>
-				Sign Up
-			</button> */
-}

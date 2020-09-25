@@ -10,7 +10,7 @@ const projectRouter = require("./routes/projectRouter");
 const ideaRouter = require("./routes/ideaRouter");
 const authRouter = require("./routes/authRouter");
 const cookieParser = require("cookie-parser");
-
+const path = require("path");
 const PORT = process.env.PORT || 8080;
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(cookieParser());
@@ -30,6 +30,12 @@ app.use("/api/idea", ideaRouter);
 app.use("/api/auth", authRouter);
 
 app.use(errorHandler());
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static("interface/build"));
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(__dirname, "interface", "build", "index.html"));
+	});
+}
 app.listen(PORT, () => {
 	console.log(`Listening at port ${PORT}`);
 });

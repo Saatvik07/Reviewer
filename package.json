@@ -7,7 +7,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"interface": "cd interface && npm start",
 		"start": "nodemon server.js",
-		"dev": "concurrently -n 'server,interface' \"npm run start\" \"npm run interface\""
+		"dev": "concurrently -n 'server,interface' \"npm run start\" \"npm run interface\"",
+		"heroku-postbuild":"cd interface && npm install && npm run build"
 	},
 	"keywords": [],
 	"author": "",
