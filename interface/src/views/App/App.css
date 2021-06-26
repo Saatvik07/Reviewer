@@ -65,3 +65,6 @@ input:-webkit-autofill:active {
 input:-webkit-autofill {
 	-webkit-text-fill-color: #ff5714 !important;
 }
+.center {
+	background-color: #ff5714;
+}
